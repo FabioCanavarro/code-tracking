@@ -3,6 +3,8 @@ import { Thermometer, Droplet, Wind, Sprout } from 'lucide-react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import './App.css';
 import './ChartStyles.css';
+
+
 const Dashboard = () => {
   const [sensorData, setSensorData] = useState(null);
   const [error, setError] = useState(null);

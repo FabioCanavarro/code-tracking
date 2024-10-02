@@ -1,7 +1,7 @@
 .dashboard {
   min-height: 100vh;
   background-color: #f3f4f6;
-  padding: 1.5rem 0;
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -10,7 +10,8 @@
 .dashboard-container {
   position: relative;
   padding: 0.75rem;
-  max-width: 36rem;
+  width: 100%;
+  max-width: 1400px; /* Increased max-width for larger screens */
   margin: 0 auto;
 }
 
@@ -55,12 +56,6 @@
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   gap: 1.5rem;
-}
-
-@media (min-width: 640px) {
-  .factors-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
 }
 
 .factor-card {
@@ -123,4 +118,51 @@
   font-size: 0.875rem;
   font-weight: 600;
   color: #10b981;
+}
+
+/* Responsive layout */
+@media (min-width: 640px) {
+  .factors-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .dashboard {
+    padding: 2rem;
+  }
+
+  .dashboard-container {
+    max-width: 95%; /* Increased to use more screen width */
+  }
+  
+  .dashboard-content {
+    padding: 3rem 2rem;
+  }
+
+  .factors-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .dashboard-title {
+    font-size: 2rem; /* Increased font size for larger screens */
+  }
+
+  .factor-name {
+    font-size: 1rem;
+  }
+
+  .current-value {
+    font-size: 1.75rem;
+  }
+
+  .ideal-value {
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 1440px) {
+  .dashboard-container {
+    max-width: 1400px; /* Set a max-width for very large screens */
+  }
 }
