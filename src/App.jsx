@@ -16,41 +16,42 @@ const Dashboard = () => {
   });
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('http://your-domain.com/api/sensor-data', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ requestTime: new Date().toISOString() }),
-        });
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const data = await response.json();
-        setSensorData(data);
-        setError(null);
+    // *@TODO FIX IT, IT WAS SENDING POST REQUEST NOT  RECEIVING
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await fetch('/api/sensor-data', {
+  //         method: 'POST',
+  //         headers: {
+  //           'Content-Type': 'application/json',
+  //         },
+  //         body: JSON.stringify({ requestTime: new Date().toISOString() }),
+  //       });
+  //       if (!response.ok) {
+  //         throw new Error('Network response was not ok');
+  //       }
+  //       const data = await response.json();
+  //       setSensorData(data);
+  //       setError(null);
 
-        // Update historical data
-        setHistoricalData(prevData => {
-          const newData = { ...prevData };
-          Object.keys(newData).forEach(key => {
-            newData[key] = [...prevData[key], { time: new Date().toLocaleTimeString(), value: data[key] }].slice(-20);
-          });
-          return newData;
-        });
-      } catch (error) {
-        setError('Failed to fetch sensor data. Using placeholder values.');
-        console.error('There was a problem with the fetch operation:', error);
-      }
-    };
+  //       // Update historical data
+  //       setHistoricalData(prevData => {
+  //         const newData = { ...prevData };
+  //         Object.keys(newData).forEach(key => {
+  //           newData[key] = [...prevData[key], { time: new Date().toLocaleTimeString(), value: data[key] }].slice(-20);
+  //         });
+  //         return newData;
+  //       });
+  //     } catch (error) {
+  //       setError('Failed to fetch sensor data. Using placeholder values.');
+  //       console.error('There was a problem with the fetch operation:', error);
+  //     }
+  //   };
 
-    fetchData();
-    const interval = setInterval(fetchData, 2000); // Refresh every 2 seconds
+  //   fetchData();
+  //   const interval = setInterval(fetchData, 2000); // Refresh every 2 seconds
 
-    return () => clearInterval(interval);
-  }, []);
+  //   return () => clearInterval(interval);
+  // }, []);
 
   const placeholderData = {
     SoilTemp: 25,
