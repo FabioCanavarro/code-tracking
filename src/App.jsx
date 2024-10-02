@@ -18,7 +18,13 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:4221/');
+        const response = await fetch('http://your-domain.com/api/sensor-data', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ requestTime: new Date().toISOString() }),
+        });
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
