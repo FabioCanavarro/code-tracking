@@ -4,7 +4,6 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 import './App.css';
 import './ChartStyles.css';
 
-
 const Dashboard = () => {
   const [sensorData, setSensorData] = useState(null);
   const [error, setError] = useState(null);
@@ -16,42 +15,43 @@ const Dashboard = () => {
   });
 
   useEffect(() => {
-    // *@TODO FIX IT, IT WAS SENDING POST REQUEST NOT  RECEIVING
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await fetch('/api/sensor-data', {
-  //         method: 'POST',
-  //         headers: {
-  //           'Content-Type': 'application/json',
-  //         },
-  //         body: JSON.stringify({ requestTime: new Date().toISOString() }),
-  //       });
-  //       if (!response.ok) {
-  //         throw new Error('Network response was not ok');
-  //       }
-  //       const data = await response.json();
-  //       setSensorData(data);
-  //       setError(null);
+    const fetchData = async () => {
+      try {
+        const response = await fetch('/api/sensor-data', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({}),
+        });
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        setSensorData(data);
+        setError(null);
 
-  //       // Update historical data
-  //       setHistoricalData(prevData => {
-  //         const newData = { ...prevData };
-  //         Object.keys(newData).forEach(key => {
-  //           newData[key] = [...prevData[key], { time: new Date().toLocaleTimeString(), value: data[key] }].slice(-20);
-  //         });
-  //         return newData;
-  //       });
-  //     } catch (error) {
-  //       setError('Failed to fetch sensor data. Using placeholder values.');
-  //       console.error('There was a problem with the fetch operation:', error);
-  //     }
-  //   };
+        // Update historical data
+        setHistoricalData(prevData => {
+          const newData = { ...prevData };
+          Object.keys(newData).forEach(key => {
+            if (data[key] !== undefined) {
+              newData[key] = [...prevData[key], { time: new Date().toLocaleTimeString(), value: data[key] }].slice(-20);
+            }
+          });
+          return newData;
+        });
+      } catch (error) {
+        setError('Failed to fetch sensor data. Using placeholder values.');
+        console.error('There was a problem with the fetch operation:', error);
+      }
+    };
 
-  //   fetchData();
-  //   const interval = setInterval(fetchData, 2000); // Refresh every 2 seconds
+    fetchData();
+    const interval = setInterval(fetchData, 2000); // Refresh every 2 seconds
 
-  //   return () => clearInterval(interval);
-  // }, []);
+    return () => clearInterval(interval);
+  }, []);
 
   const placeholderData = {
     SoilTemp: 25,
@@ -97,7 +97,7 @@ const Dashboard = () => {
                     <div className="factor-name">{factor.name}</div>
                     <div className="factor-values">
                       <span className="current-value">
-                        {factor.current}{factor.unit}
+                      {factor.current !== undefined ? factor.current.toFixed(1) + factor.unit : '-'}
                       </span>
                       <span className="ideal-value">
                         Ideal: {factor.ideal}{factor.unit}
