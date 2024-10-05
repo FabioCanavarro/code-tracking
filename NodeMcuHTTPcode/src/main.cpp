@@ -1,47 +1,57 @@
 #include <Arduino.h>
 #include <ESP8266WiFi.h>
 #include <ESP8266HTTPClient.h>
-
 #include <ArduinoJson.h>
-#include <WiFiManager.h>
 
-const char* serverUrl = "https://c925-45-126-185-184.ngrok-free.app/api/nodeMCU-data";
+const char* ssid = "EVELYN 4G";
+const char* password = "EVELYN5588";
 
-WiFiServer server(80);
 
 void setup() {
-    Serial.begin(115200);
-    Serial.println("Ready");
-    WiFiManager wm;
-
-    bool res;
-    res = wm.autoConnect("NodeMcuV3","pass");
-
-    if(!res) {
-        Serial.println("Failed to connect");
-        ESP.restart();
-    } 
-    else {
-        Serial.println("");
-        Serial.println("WiFi connected.");
-        Serial.println("IP address: ");
-        Serial.println(WiFi.localIP());
-        server.begin();
-    }
+  Serial.begin(115200);
+  WiFi.begin(ssid, password);
+  
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(1000);
+    Serial.println("Connecting to WiFi...");
+  }
+  
+  Serial.println("Connected to WiFi");
+  Serial.print("ESP8266 IP address: ");
+  Serial.println(WiFi.localIP());
 }
 
-void loop(){
+void loop() {
   if (WiFi.status() == WL_CONNECTED) {
-    WiFiClientSecure client;
-    client.setInsecure(); // Only use this for testing. In production, use proper certificate validation.
-    HTTPClient https;
-    
+    WiFiClient client;
+    HTTPClient http;
+    String url = "http://192.168.18.15:3001/api/nodeMCU-data";
+    Serial.print("Connecting to: ");
+    Serial.println(url);
+    http.begin(client, url);
+    http.addHeader("Content-Type", "application/json");
 
+
+
+
+
+
+
+
+    //change it
     float soilTemp = random(100);
     float airTemp = random(100);
     float humidity = random(100);
     float soilMoisture = random(100);
     
+
+
+
+
+
+
+
+
     // Create JSON object
     // Create JSON object
     DynamicJsonDocument doc(200);
@@ -50,27 +60,35 @@ void loop(){
     doc["Humidity"] = humidity;
     doc["SoilMoisture"] = soilMoisture;
 
-    // Serialize JSON to string
-    String jsonString;
-    serializeJson(doc, jsonString);
+    String requestBody;
+    serializeJson(doc, requestBody);
 
-    // Send HTTP POST request
-    HTTPClient http;
-    http.begin(serverUrl);
-    http.addHeader("Content-Type", "application/json");
-    int httpResponseCode = http.POST(jsonString);
+    Serial.println("[HTTP] POST...");
+    Serial.println("Request body:");
+    Serial.println(requestBody);
+    
+    int httpCode = http.POST(requestBody);
 
-    if (httpResponseCode > 0) {
-      String response = http.getString();
-      Serial.println(httpResponseCode);
-      Serial.println(response);
+    if (httpCode > 0) {
+      Serial.printf("[HTTP] POST... code: %d\n", httpCode);
+
+      if (httpCode == HTTP_CODE_OK || httpCode == HTTP_CODE_CREATED) {
+        String payload = http.getString();
+        Serial.println("Response payload:");
+        Serial.println(payload);
+      } else {
+        Serial.printf("Server returned non-OK status: %d\n", httpCode);
+        Serial.println("Response headers:");
+        Serial.println(http.getString());
+      }
     } else {
-      Serial.print("Error on sending POST: ");
-      Serial.println(httpResponseCode);
+      Serial.printf("[HTTP] POST... failed, error: %s\n", http.errorToString(httpCode).c_str());
     }
 
     http.end();
+  } else {
+    Serial.println("WiFi Disconnected");
   }
-
-  delay(2000);  // Wait for 5 seconds before sending the next data point
+  
+  delay(2000);
 }

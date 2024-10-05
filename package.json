@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "start":"concurrently --kill-others \"vite\" \"node server.js\"",
+    "start":"concurrently --kill-others \"vite --host\" \"node server.js\"",
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
