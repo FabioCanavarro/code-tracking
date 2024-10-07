@@ -133,7 +133,7 @@
   }
 
   .dashboard-container {
-    max-width: 95%; /* Increased to use more screen width */
+    max-width: 100%; /* Increased to use more screen width */
   }
   
   .dashboard-content {
@@ -163,6 +163,6 @@
 
 @media (min-width: 1440px) {
   .dashboard-container {
-    max-width: 1400px; /* Set a max-width for very large screens */
+    max-width: 2000px; /* Set a max-width for very large screens */
   }
 }

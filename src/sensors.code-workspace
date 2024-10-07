@@ -57,6 +57,7 @@
 			"xloctime": "cpp",
 			"xmemory": "cpp",
 			"xtr1common": "cpp"
-		}
+		},
+		"liveServer.settings.multiRootWorkspaceName": "sensors"
 	}
 }

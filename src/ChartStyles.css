@@ -1,39 +1,58 @@
 .factor-chart {
   margin-top: 1rem;
   border-top: 1px solid #e5e7eb;
-  height: 200px;
+  height: 300px;
+  padding: 1rem;
 }
 
 .recharts-wrapper {
   font-size: 12px;
 }
 
-.recharts-tooltip-wrapper {
-  background-color: rgba(255, 255, 255, 0.9);
+.custom-tooltip {
+  background-color: rgba(255, 255, 255, 0.95);
   border: 1px solid #ccc;
   border-radius: 4px;
-  padding: 8px;
+  padding: 8px 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.recharts-default-tooltip {
-  background-color: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
+.tooltip-time {
+  margin: 0;
+  color: #666;
+  font-size: 12px;
 }
 
-/* Responsive chart size */
+.tooltip-value {
+  margin: 4px 0 0 0;
+  color: #333;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.tooltip-ideal {
+  margin: 4px 0 0 0;
+  color: #666;
+  font-size: 12px;
+  font-style: italic;
+}
+
+.recharts-reference-line .recharts-label {
+  fill-opacity: 0.7;
+}
+
 @media (min-width: 1024px) {
   .factor-chart {
-    height: 300px; /* Increased height for larger screens */
+    height: 400px;
   }
-
+  
   .recharts-wrapper {
-    font-size: 14px; /* Slightly larger font for better readability on large screens */
+    font-size: 14px;
   }
 }
 
 @media (min-width: 1440px) {
   .factor-chart {
-    height: 350px; /* Even taller for very large screens */
+    height: 450px;
   }
 }
