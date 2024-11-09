@@ -12,3 +12,12 @@ The product consist of 2 main subproduct:
 - Farming Automation
 - Clean backend
 
+## Note
+- The code is made by a single person(Me), therefore unexpected bugs may appear.
+- And it is made within a limited time schedule
+
+## Planned Features
+- Authentication
+- Cookies
+- Home Page
+- Ai Insight
