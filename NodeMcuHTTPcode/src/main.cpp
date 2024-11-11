@@ -13,10 +13,10 @@
 Upload:
       C:\Users\ASUS\.platformio\penv\Scripts\platformio.exe run --target upload
 Serial Monitor:
-      C:\Users\ASUS\.platformio\penv\Scripts\platformio.exe device monitor
+      C:\Users\ASUS\.platformio\penv\Scripts\platformio.exe device monitor --baud=115200 
 
 Combined command:
-  cd NodeMcuHTTPcode; C:\Users\ASUS\.platformio\penv\Scripts\platformio.exe run --target upload; C:\Users\ASUS\.platformio\penv\Scripts\platformio.exe device monitor --baud 115200 
+  cd NodeMcuHTTPcode; C:\Users\ASUS\.platformio\penv\Scripts\platformio.exe run --target upload; C:\Users\ASUS\.platformio\penv\Scripts\platformio.exe device monitor --baud 115200
 */
 
 
@@ -29,10 +29,9 @@ const int DB18S20 = D4; //completed
 
 // output Pins
 const int UAH = D5; //completed
-const int water_pump = D8; //completed
-const int fertilizer_pump = D7; //completed
+const int water_pump = D8;//completed
+const int fertilizer_pump = D7;//completed 
 const int growlight = D0; //completed
-
 
 // DHT22 setup
 DHT dht(DHTPIN, DHT22);
@@ -121,16 +120,21 @@ int read_hygrometer(){
 WiFiServer server(80);
 
 void setup() {
+digitalWrite(fertilizer_pump,HIGH);
+digitalWrite(water_pump,HIGH);
   // wifi
   Serial.begin(115200);
     Serial.println("Ready");
     WiFiManager wm;
-
+    wm.setConfigPortalTimeout(1000000000);
+    wm.setBreakAfterConfig(false);
     bool res;
-    res = wm.autoConnect("NodeMcuV3","pass");
+    res = wm.autoConnect("AgroBioSync","agrobiosync");
 
     if(!res) {
         Serial.println("Failed to connect");
+        res = wm.autoConnect("AgroBioSync","agrobiosync");
+        ESP.restart();
     } 
     else {
         Serial.println("");
@@ -173,7 +177,6 @@ void loop() {
   
 
 
-
     //change it to fit into network code
     float soilTemp = soiltempc;
     float airTemp = tempC;
@@ -195,8 +198,9 @@ void loop() {
     if (isnan(hum) || isnan(tempC)) 
   {
       Serial.print("Failed to read");
-      Serial.setCursor(0,1);
       Serial.print("from DHT sensor!");
+      humidity = needed_humidity_percentage;
+      airTemp = needed_soil_temp;
       // return;
   }   
 
@@ -204,43 +208,165 @@ void loop() {
 // Error 
 
 
+  // !Please Change so that website display the timer
+  if (((currentsecond - tempsecond) /3600) >= duration_before_fertlizer_in_hours)
+  {
+    /*
+      this is where the code for spraying it will be
+      turn on spray
+    */
+
+    // !Please Change so that website display the message
+    digitalWrite(fertilizer_pump,LOW);
+
+    Serial.print("Spraying fertilizer.");
+    delay(300);
+
+
+    Serial.print("Spraying fertilizer..");
+    delay(300);
+
+
+    Serial.print("Spraying fertilizer...");
+    tempsecond = currentsecond;
+    digitalWrite(fertilizer_pump,HIGH);
+    /*
+      this is where the code for spraying it will be
+      turn off spray
+    */
+  }
+
+  if ( soilMoisture< needed_moisture_percentage){
+    /*
+      this is where the code for spraying it will be
+      turn on spray
+    */
+  // !Please Change so that website display the message
+    digitalWrite(water_pump,LOW);
+    Serial.print("Spraying water.");
+    delay(300);
+    Serial.print("Spraying water..");  
+    delay(300);
+    Serial.print("Spraying water...");
+    digitalWrite(water_pump,HIGH);
+    /*
+      this is where the code for spraying it will be
+      turn off spray
+    */
+
+  }
 
 
 
 
 
-    // Create JSON object
-    // Create JSON object
-    DynamicJsonDocument doc(200);
-    doc["SoilTemp"] = soilTemp;
-    doc["AirTemp"] = airTemp;
-    doc["Humidity"] = humidity;
-    doc["SoilMoisture"] = soilMoisture;
 
-    String requestBody;
-    serializeJson(doc, requestBody);
 
-    Serial.println("[HTTP] POST...");
-    Serial.println("Request body:");
-    Serial.println(requestBody);
+
+
+  if (tempC < needed_air_temp){
+    /*
+      Growlight
+    */
+
+    delay(200);
+    digitalWrite(growlight,HIGH);
+    float tempC = dht.readTemperature();
     
-    int httpCode = http.POST(requestBody);
+  }
+  else if (tempC > needed_air_temp){
+    /*
+      turn off growlight
+      turn on ultrasonic atomizer humidifier for 3 sec
+    */
+    delay(200);
+    digitalWrite(growlight,LOW);
+    float tempC = dht.readTemperature();
+    
+  }
 
-    if (httpCode > 0) {
-      Serial.printf("[HTTP] POST... code: %d\n", httpCode);
 
-      if (httpCode == HTTP_CODE_OK || httpCode == HTTP_CODE_CREATED) {
-        String payload = http.getString();
-        Serial.println("Response payload:");
-        Serial.println(payload);
-      } else {
-        Serial.printf("Server returned non-OK status: %d\n", httpCode);
-        Serial.println("Response headers:");
-        Serial.println(http.getString());
-      }
+
+  /*
+      soil temp rebound *TODO: havent been make
+  */
+  if (soiltempc < needed_soil_temp){
+
+    float soiltempc = readDS18B20();
+
+  }
+  else if (soiltempc > needed_soil_temp){
+
+    delay(200);
+    digitalWrite(water_pump,HIGH);
+    
+    
+    delay(400);
+    digitalWrite(water_pump,LOW);
+    
+  }
+
+
+
+
+
+  if (hum < needed_humidity_percentage){
+    /*
+    turn on ultrasonic atomizer humidifier
+    */
+    delay(200);
+    digitalWrite(UAH,HIGH);
+    float hum = dht.readHumidity();
+    
+
+  }
+  else if (hum > needed_humidity_percentage){
+    /*
+    turn off ultrasonic atomizer humidifier
+    turn on grow light
+    */
+    delay(200);
+    digitalWrite(UAH,HIGH);
+    float hum = dht.readHumidity();
+  }
+
+
+
+
+
+
+  // Create JSON object
+  // Create JSON object
+  DynamicJsonDocument doc(200);
+  doc["SoilTemp"] = soilTemp;
+  doc["AirTemp"] = airTemp;
+  doc["Humidity"] = humidity;
+  doc["SoilMoisture"] = soilMoisture;
+
+  String requestBody;
+  serializeJson(doc, requestBody);
+
+  Serial.println("[HTTP] POST...");
+  Serial.println("Request body:");
+  Serial.println(requestBody);
+  
+  int httpCode = http.POST(requestBody);
+
+  if (httpCode > 0) {
+    Serial.printf("[HTTP] POST... code: %d\n", httpCode);
+
+    if (httpCode == HTTP_CODE_OK || httpCode == HTTP_CODE_CREATED) {
+      String payload = http.getString();
+      Serial.println("Response payload:");
+      Serial.println(payload);
     } else {
-      Serial.printf("[HTTP] POST... failed, error: %s\n", http.errorToString(httpCode).c_str());
+      Serial.printf("Server returned non-OK status: %d\n", httpCode);
+      Serial.println("Response headers:");
+      Serial.println(http.getString());
     }
+  } else {
+    Serial.printf("[HTTP] POST... failed, error: %s\n", http.errorToString(httpCode).c_str());
+  }
 
     http.end();
   } else {
@@ -250,127 +376,4 @@ void loop() {
 
   
 
-
-// !Please Change so that website display the timer
-if (((currentsecond - tempsecond) /3600) >= duration_before_fertlizer_in_hours)
-{
-  /*
-    this is where the code for spraying it will be
-    turn on spray
-  */
-
-  // !Please Change so that website display the message
-  digitalWrite(fertilizer_pump,HIGH);
-
-  Serial.print("Spraying fertilizer.");
-  delay(300);
-
-
-  Serial.print("Spraying fertilizer..");
-  delay(300);
-
-
-  Serial.print("Spraying fertilizer...");
-  tempsecond = currentsecond;
-  digitalWrite(fertilizer_pump,LOW);
-  /*
-    this is where the code for spraying it will be
-    turn off spray
-  */
-}
-
-if (soilMoisture < needed_moisture_percentage){
-  /*
-    this is where the code for spraying it will be
-    turn on spray
-  */
- // !Please Change so that website display the message
-  digitalWrite(water_pump,HIGH);
-  Serial.print("Spraying water.");
-  delay(300);
-  Serial.print("Spraying water..");  
-  delay(300);
-  Serial.print("Spraying water...");
-  digitalWrite(water_pump,LOW);
-  /*
-    this is where the code for spraying it will be
-    turn off spray
-  */
-  delay(250);
-  int moisturelevel = read_hygrometer();
-}
-
-
-
-
-
-
-
-
-
-if (tempC < needed_air_temp){
-  /*
-    Growlight
-  */
-
-  delay(200);
-  digitalWrite(growlight,HIGH);
-  float tempC = dht.readTemperature();
-  
-}
-else if (tempC > needed_air_temp){
-  /*
-    turn off growlight
-    turn on ultrasonic atomizer humidifier for 3 sec
-  */
-  delay(200);
-  digitalWrite(growlight,LOW);
-  float tempC = dht.readTemperature();
-  
-}
-
-
-
-/*
-    soil temp rebound *TODO: havent been make
-*/
-if (soiltempc < needed_soil_temp){
-
-  float soiltempc = readDS18B20();
-
-}
-else if (soiltempc > needed_soil_temp){
-
-  delay(200);
-  digitalWrite(water_pump,HIGH);
-  
-  float soiltempc = readDS18B20();
-  delay(400);
-  digitalWrite(water_pump,LOW);
-  
-}
-
-
-
-
-
-if (hum < needed_humidity_percentage){
-  /*
-  turn on ultrasonic atomizer humidifier
-  */
-  delay(200);
-  digitalWrite(UAH,HIGH);
-  float hum = dht.readHumidity();
-  
-
-}
-else if (hum > needed_humidity_percentage){
-  /*
-  turn off ultrasonic atomizer humidifier
-  turn on grow light
-  */
-  delay(200);
-  digitalWrite(UAH,HIGH);
-  float hum = dht.readHumidity();
-}
 }
