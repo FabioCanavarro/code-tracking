@@ -11,7 +11,7 @@
 }
 
 .nav-content {
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto;
   padding: 0 2rem;
 }
@@ -31,7 +31,7 @@
 .logo-text {
   font-size: 1.25rem;
   font-weight: 600;
-  color: #22d3ee;
+  color: #22b1ee;
   transition: color 0.2s;
 }
 

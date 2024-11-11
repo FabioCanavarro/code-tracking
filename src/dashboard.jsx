@@ -23,27 +23,42 @@ const Dashboard = () => {
     SoilMoisture: []
   });
 
-  // Function to determine if a timestamp should be kept based on its age
-  const shouldKeepTimestamp = (timestamp, latestTimestamp) => {
-    const age = latestTimestamp - timestamp;
-    const oneMinute = 60 * 1000;
-    
-    if (age < oneMinute) return true;
-    if (age < 5 * oneMinute) return age % (5 * 1000) === 0;
-    if (age < 10 * oneMinute) return age % (15 * 1000) === 0;
-    return false;
-  };
+  // Initialize with some sample data points
+  useEffect(() => {
+    const now = Date.now();
+    const initialData = {
+      SoilTemp: [],
+      AirTemp: [],
+      Humidity: [],
+      SoilMoisture: []
+    };
+
+    // Create 10 data points for the last 10 minutes
+    for (let i = 9; i >= 0; i--) {
+      const time = now - (i * 60000); // Every minute
+      const baseValues = {
+        SoilTemp: 25 + Math.random() * 2 - 1,
+        AirTemp: 22 + Math.random() * 2 - 1,
+        Humidity: 60 + Math.random() * 4 - 2,
+        SoilMoisture: 40 + Math.random() * 4 - 2
+      };
+
+      Object.keys(initialData).forEach(key => {
+        initialData[key].push({
+          time: time,
+          value: baseValues[key],
+          displayTime: new Date(time).toLocaleTimeString()
+        });
+      });
+    }
+
+    setHistoricalData(initialData);
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('/api/sensor-data', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({}),
-        });
+        const response = await fetch('/api/sensor-data');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -57,14 +72,18 @@ const Dashboard = () => {
           const newData = { ...prevData };
           Object.keys(newData).forEach(key => {
             if (data[key] !== undefined) {
+              // Add new data point
               const newPoint = {
                 time: currentTime,
                 value: data[key],
                 displayTime: new Date().toLocaleTimeString()
               };
 
+              // Keep only last 10 minutes of data
+              const tenMinutesAgo = currentTime - (10 * 60 * 1000);
               const filteredData = prevData[key]
-                .filter(point => shouldKeepTimestamp(point.time, currentTime));
+                .filter(point => point.time > tenMinutesAgo)
+                .slice(-60); // Keep maximum 60 points
 
               newData[key] = [...filteredData, newPoint];
             }
@@ -83,97 +102,60 @@ const Dashboard = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const placeholderData = {
-    SoilTemp: 25,
-    AirTemp: 22,
-    Humidity: 60,
-    SoilMoisture: 40,
-    IdealSoilTemp: 23,
-    IdealAirTemp: 21,
-    IdealHumidity: 65,
-    IdealSoilMoisture: 45
-  };
-
-  const displayData = sensorData || placeholderData;
-
-  const formatXAxis = (timestamp) => {
-    const date = new Date(timestamp);
-    return date.toLocaleTimeString('en-GB', { 
-      hour: '2-digit', 
-      minute: '2-digit', 
-      second: '2-digit', 
-      hour12: false 
-    });
-  };
-
-  // Custom tooltip formatter with 24-hour time
-  const CustomTooltip = ({ active, payload, label, unit, idealValue }) => {
-    if (active && payload && payload.length) {
-      return (
-        <div className="custom-tooltip">
-          <p className="tooltip-time">{formatXAxis(label)}</p>
-          <p className="tooltip-value">
-            Current: {payload[0].value.toFixed(1)}{unit}
-          </p>
-          <p className="tooltip-ideal">
-            Ideal: {idealValue}{unit}
-          </p>
-        </div>
-      );
-    }
-    return null;
-  };
-
   const factors = [
     { 
       name: 'Soil Temp', 
       key: 'SoilTemp', 
       icon: Thermometer, 
-      current: displayData.SoilTemp, 
-      ideal: displayData.IdealSoilTemp, 
+      current: sensorData?.SoilTemp || 25, 
+      ideal: sensorData?.IdealSoilTemp || 23, 
       unit: '°C', 
       colorClass: 'yellow',
-      yAxisRange: [0, 40],
-      lineColor: '#f59e0b',
-      idealLineColor: '#92400e'
+      lineColor: '#f59e0b'
     },
     { 
       name: 'Air Temp', 
       key: 'AirTemp', 
       icon: Wind, 
-      current: displayData.AirTemp, 
-      ideal: displayData.IdealAirTemp, 
+      current: sensorData?.AirTemp || 22, 
+      ideal: sensorData?.IdealAirTemp || 21, 
       unit: '°C', 
       colorClass: 'blue',
-      yAxisRange: [0, 50],
-      lineColor: '#3b82f6',
-      idealLineColor: '#1e40af'
+      lineColor: '#3b82f6'
     },
     { 
       name: 'Humidity', 
       key: 'Humidity', 
       icon: Droplet, 
-      current: displayData.Humidity, 
-      ideal: displayData.IdealHumidity, 
+      current: sensorData?.Humidity || 60, 
+      ideal: sensorData?.IdealHumidity || 65, 
       unit: '%', 
       colorClass: 'green',
-      yAxisRange: [0, 100],
-      lineColor: '#10b981',
-      idealLineColor: '#065f46'
+      lineColor: '#10b981'
     },
     { 
       name: 'Soil Moisture', 
       key: 'SoilMoisture', 
       icon: Sprout, 
-      current: displayData.SoilMoisture, 
-      ideal: displayData.IdealSoilMoisture, 
+      current: sensorData?.SoilMoisture || 40, 
+      ideal: sensorData?.IdealSoilMoisture || 45, 
       unit: '%', 
       colorClass: 'brown',
-      yAxisRange: [0, 100],
-      lineColor: '#8b4513',
-      idealLineColor: '#573214'
-    },
+      lineColor: '#8b4513'
+    }
   ];
+
+  const CustomTooltip = ({ active, payload, label }) => {
+    if (active && payload && payload.length) {
+      return (
+        <div className="custom-tooltip">
+          <p className="tooltip-time">{new Date(label).toLocaleTimeString()}</p>
+          <p className="tooltip-value">{`${payload[0].value.toFixed(1)}${payload[0].unit}`}</p>
+        </div>
+      );
+    }
+    return null;
+  };
 
   return (
     <div className="dashboard">
@@ -199,7 +181,7 @@ const Dashboard = () => {
                     <div className="factor-name">{factor.name}</div>
                     <div className="factor-values">
                       <span className="current-value">
-                        {factor.current !== undefined ? factor.current.toFixed(1) + factor.unit : '-'}
+                        {factor.current.toFixed(1)}{factor.unit}
                       </span>
                       <span className="ideal-value">
                         Ideal: {factor.ideal}{factor.unit}
@@ -213,43 +195,38 @@ const Dashboard = () => {
                       data={historicalData[factor.key]} 
                       margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
                     >
-                      <CartesianGrid strokeDasharray="3 3" />
+                      <CartesianGrid 
+                        strokeDasharray="3 3" 
+                        stroke="#e5e7eb"
+                      />
                       <XAxis 
                         dataKey="time" 
-                        tickFormatter={formatXAxis}
-                        tick={{ fontSize: 12 }}
-                        angle={-45}
-                        textAnchor="end"
+                        tickFormatter={(time) => new Date(time).toLocaleTimeString()}
+                        type="number"
+                        domain={['dataMin', 'dataMax']}
+                        tick={{ fontSize: 12, fill: '#6b7280' }}
+                        stroke="#e5e7eb"
                       />
                       <YAxis 
-                        domain={factor.yAxisRange}
-                        tick={{ fontSize: 12 }}
-                        tickCount={6}
-                        label={{ 
-                          value: factor.unit, 
-                          angle: -90, 
-                          position: 'insideLeft',
-                          style: { textAnchor: 'middle' }
-                        }}
+                        domain={[
+                          (dataMin) => Math.floor(dataMin * 0.9),
+                          (dataMax) => Math.ceil(dataMax * 1.1)
+                        ]}
+                        tick={{ fontSize: 12, fill: '#6b7280' }}
+                        stroke="#e5e7eb"
                       />
-                      <Tooltip 
-                        content={<CustomTooltip 
-                          unit={factor.unit} 
-                          idealValue={factor.ideal}
-                        />}
-                      />
-                      {/* Ideal value reference line */}
+                      <Tooltip content={<CustomTooltip unit={factor.unit} />} />
                       <ReferenceLine 
                         y={factor.ideal} 
-                        stroke={factor.idealLineColor}
+                        stroke={factor.lineColor} 
                         strokeDasharray="3 3"
                         strokeWidth={2}
                         label={{ 
                           value: 'Ideal',
                           position: 'right',
-                          fill: factor.idealLineColor,
+                          fill: factor.lineColor,
                           fontSize: 12
-                        }}
+                        }} 
                       />
                       <Line 
                         type="monotone" 
