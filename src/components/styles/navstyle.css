@@ -32,6 +32,9 @@
   font-size: 1.25rem;
   font-weight: 600;
   color: #22b1ee;
+  background-color: #b2d8ea3e;
+  padding: 2px;
+  border-radius: 7px;
   transition: color 0.2s;
 }
 

@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Menu, X, ArrowRight, Phone, MapPin, Mail, Clock, ExternalLink} from 'lucide-react'; 
+import { Menu, X, ArrowRight, Phone, MapPin, Mail,  ExternalLink} from 'lucide-react'; 
 import { FaWhatsapp } from 'react-icons/fa';
 import './styles/navstyle.css';
 import "./styles/homestyle.css";
@@ -26,7 +26,7 @@ const Navbar = () => {
       <div className="nav-content">
         <div className="nav-wrapper">
           <Link to="/" className="logo">
-            <span className="logo-text"><u>TerraBloom</u></span>
+            <span className="logo-text">GreenSync</span>
           </Link>
           
           <button className="mobile-menu-btn" onClick={toggleMenu}>
@@ -67,7 +67,7 @@ const HomePage = () => {
   const features = [
     {
       title: "Real-Time Monitoring",
-      description: "Track soil conditions, temperature, and humidity instantly with our advanced sensor technology.",
+      description: "Track soil moisture, temperature, and humidity instantly with our advanced sensor technology.",
       icon: "📊",
       color: "#4f46e5" // Indigo
     },
@@ -78,20 +78,20 @@ const HomePage = () => {
       color: "#0891b2" // Cyan
     },
     {
-      title: "AI-Powered Analytics",
-      description: "Advanced algorithms analyze your farm's data to provide actionable insights and predictive forecasting.",
-      icon: "🤖",
+      title: "Desktop And Mobile Compatible",
+      description: "The Sleek Website is fully responsive and compatible with desktop and mobile devices.",
+      icon: "💻📱",
       color: "#7c3aed" // Violet
     },
     {
-      title: "Mobile Control",
-      description: "Manage your farm from anywhere using our intuitive mobile app interface.",
-      icon: "📱",
+      title: "Global Reach",
+      description: "View your farm from anywhere using our intuitive web interface.",
+      icon: "🌍",
       color: "#059669" // Emerald
     },
     {
-      title: "Weather Integration",
-      description: "Stay ahead with integrated weather forecasting and automated climate response systems.",
+      title: "Smart Rebound System",
+      description: "Be able to rebound the negative effect of the environment by negative feedback.",
       icon: "🌤",
       color: "#ea580c" // Orange
     },
@@ -239,8 +239,8 @@ const ContactPage = () => {
               <Phone size={24} />
             </div>
             <h2 className="contact-type">Phone</h2>
-            <p className="contact-info">Main: +1 (555) 123-4567</p>
-            <p className="contact-info">Support: +1 (555) 987-6543</p>
+            <p className="contact-info">Main: +62 (555) 123-4567</p>
+            <p className="contact-info">Support: +62 (555) 987-6543</p>
             <a href="tel:+15551234567" className="contact-link">
               Call us now <ExternalLink size={16} />
             </a>
@@ -256,8 +256,8 @@ const ContactPage = () => {
               <FaWhatsapp size={24} />
             </div>
             <h2 className="contact-type">WhatsApp</h2>
-            <p className="contact-info">Available Mon-Fri, 9AM-6PM</p>
-            <a href="https://wa.me/15551234567" target="_blank" rel="noopener noreferrer" className="contact-link">
+            <p className="contact-info">Available Mon-Fri</p>
+            <a href="https://wa.me/" target="_blank" rel="noopener noreferrer" className="contact-link">
               Chat on WhatsApp <ExternalLink size={16} />
             </a>
           </motion.div>
@@ -292,41 +292,15 @@ const ContactPage = () => {
               <Mail size={24} />
             </div>
             <h2 className="contact-type">Email</h2>
-            <p className="contact-info">General: info@company.com</p>
-            <p className="contact-info">Support: support@company.com</p>
+            <p className="contact-info">General: fakekelios071@gmail.com</p>
             <a href="mailto:info@company.com" className="contact-link">
               Send email <ExternalLink size={16} />
             </a>
           </motion.div>
         </div>
 
-        <div className="divider"></div>
 
-        <motion.div 
-          className="business-hours"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
-        >
-          <div className="card-icon">
-            <Clock size={24} />
-          </div>
-          <h2 className="hours-title">Business Hours</h2>
-          <div className="hours-list">
-            <div className="hours-item">
-              <span>Monday - Friday</span>
-              <span>9:00 AM - 6:00 PM</span>
-            </div>
-            <div className="hours-item">
-              <span>Saturday</span>
-              <span>10:00 AM - 4:00 PM</span>
-            </div>
-            <div className="hours-item">
-              <span>Sunday</span>
-              <span>Closed</span>
-            </div>
-          </div>
-        </motion.div>
+
       </motion.div>
     </div>
   );
