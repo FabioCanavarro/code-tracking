@@ -5,7 +5,7 @@
   left: 0;
   right: 0;
   z-index: 50;
-  background-color: #ffffff;
+  background-color: #EDEAEC ;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
   padding: 0.75rem 0;
 }
@@ -31,8 +31,7 @@
 .logo-text {
   font-size: 1.25rem;
   font-weight: 600;
-  color: #22b1ee;
-  background-color: #b2d8ea3e;
+  color: #577391;
   padding: 2px;
   border-radius: 7px;
   transition: color 0.2s;
@@ -60,7 +59,7 @@
 
 .nav-link:hover,
 .nav-link.active {
-  color: #0ea5e9 !important;
+  color: #577391 !important;
 }
 
 .nav-link-underline {
@@ -69,7 +68,7 @@
   left: 0;
   right: 0;
   height: 2px;
-  background-color: #0ea5e9;
+  background-color: #577391;
 }
 
 /* Mobile menu button */
@@ -114,7 +113,6 @@
   left: 0;
   right: 0;
   height: 5rem;
-  background-color: white;
   z-index: 1000;
 }
 

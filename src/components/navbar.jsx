@@ -1,5 +1,5 @@
 // Navbar.jsx
-import React, { useState } from 'react';
+import React, { useState , useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Menu, X, ArrowRight, Phone, MapPin, Mail,  ExternalLink} from 'lucide-react'; 
@@ -11,6 +11,31 @@ import "./styles/pagestyle.css";
 const Navbar = () => {
   const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const [shouldShowNavbar, setShouldShowNavbar] = useState(true);
+
+  useEffect(() => {
+    const controlNavbar = () => {
+      const currentScrollY = window.scrollY;
+      
+      if (currentScrollY > lastScrollY) {
+        // Scrolling down
+        setShouldShowNavbar(false);
+      } else {
+        // Scrolling up
+        setShouldShowNavbar(true);
+      }
+      
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener('scroll', controlNavbar);
+
+    // Cleanup
+    return () => {
+      window.removeEventListener('scroll', controlNavbar);
+    };
+  }, [lastScrollY]);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -19,9 +44,16 @@ const Navbar = () => {
   return (
     <motion.nav 
       className="nav-container"
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5 }}
+      initial={{ y: 0 }}
+      animate={{ 
+        y: shouldShowNavbar ? 0 : -100,
+        transition: {
+          type: "spring",
+          stiffness: 100,
+          damping: 20,
+          duration: 0.3
+        }
+      }}
     >
       <div className="nav-content">
         <div className="nav-wrapper">
@@ -100,6 +132,47 @@ const HomePage = () => {
       description: "Sustainable farming practices optimized for minimal environmental impact and maximum yield.",
       icon: "🌱",
       color: "#65a30d" // Lime
+    }
+  ];
+  const testimonials = [
+    {
+      name: "John Smith",
+      role: "Farm Owner",
+      image: "/api/placeholder/80/80",
+      content: "AgroBioSync has transformed our farming operations. We've seen a 40% increase in yield while reducing water usage by 30%.",
+      rating: 5
+    },
+    {
+      name: "Maria Garcia",
+      role: "Agricultural Consultant",
+      image: "/api/placeholder/80/80",
+      content: "The real-time monitoring and automated response systems have made managing multiple farms significantly easier.",
+      rating: 5
+    },
+    {
+      name: "David Chen",
+      role: "Sustainable Farming Expert",
+      image: "/api/placeholder/80/80",
+      content: "This is the future of agriculture. The integration of IoT with sustainable practices is exactly what modern farming needs.",
+      rating: 5
+    }
+  ];
+  const faqs = [
+    {
+      question: "How does AgroBioSync help reduce water consumption?",
+      answer: "Our smart irrigation system uses real-time soil moisture data and weather forecasts to optimize watering schedules, typically reducing water usage by 20-30% while maintaining optimal growing conditions."
+    },
+    {
+      question: "What type of support do you provide?",
+      answer: "We offer 24/7 technical support, regular system maintenance, training sessions, and continuous updates to ensure your farming operations run smoothly."
+    },
+    {
+      question: "Can AgroBioSync integrate with existing farming equipment?",
+      answer: "Yes, our system is designed to be compatible with most modern farming equipment and can be customized to work with legacy systems through our adapters."
+    },
+    {
+      question: "What is the initial setup process like?",
+      answer: "Our team handles the entire setup process, including system installation, sensor placement, and staff training. The typical setup time is 2-3 days, with minimal disruption to your operations."
     }
   ];
 
