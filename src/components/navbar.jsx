@@ -134,47 +134,6 @@ const HomePage = () => {
       color: "#65a30d" // Lime
     }
   ];
-  const testimonials = [
-    {
-      name: "John Smith",
-      role: "Farm Owner",
-      image: "/api/placeholder/80/80",
-      content: "AgroBioSync has transformed our farming operations. We've seen a 40% increase in yield while reducing water usage by 30%.",
-      rating: 5
-    },
-    {
-      name: "Maria Garcia",
-      role: "Agricultural Consultant",
-      image: "/api/placeholder/80/80",
-      content: "The real-time monitoring and automated response systems have made managing multiple farms significantly easier.",
-      rating: 5
-    },
-    {
-      name: "David Chen",
-      role: "Sustainable Farming Expert",
-      image: "/api/placeholder/80/80",
-      content: "This is the future of agriculture. The integration of IoT with sustainable practices is exactly what modern farming needs.",
-      rating: 5
-    }
-  ];
-  const faqs = [
-    {
-      question: "How does AgroBioSync help reduce water consumption?",
-      answer: "Our smart irrigation system uses real-time soil moisture data and weather forecasts to optimize watering schedules, typically reducing water usage by 20-30% while maintaining optimal growing conditions."
-    },
-    {
-      question: "What type of support do you provide?",
-      answer: "We offer 24/7 technical support, regular system maintenance, training sessions, and continuous updates to ensure your farming operations run smoothly."
-    },
-    {
-      question: "Can AgroBioSync integrate with existing farming equipment?",
-      answer: "Yes, our system is designed to be compatible with most modern farming equipment and can be customized to work with legacy systems through our adapters."
-    },
-    {
-      question: "What is the initial setup process like?",
-      answer: "Our team handles the entire setup process, including system installation, sensor placement, and staff training. The typical setup time is 2-3 days, with minimal disruption to your operations."
-    }
-  ];
 
   return (
     <div className="home-container">
