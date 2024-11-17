@@ -26,6 +26,7 @@
     "react-icons": "^5.3.0",
     "react-router-dom": "^6.28.0",
     "recharts": "^2.12.7",
+    "shadcn-ui": "^0.2.3",
     "start": "^5.1.0",
     "ui": "github:shadcn/ui"
   },
