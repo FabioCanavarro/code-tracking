@@ -134,7 +134,24 @@ const HomePage = () => {
       color: "#65a30d" // Lime
     }
   ];
-
+  const faqs = [
+    {
+      question: "What is AgroBioSync?",
+      answer: "AgroBioSync is an innovative agricultural technology platform that combines real-time monitoring, smart irrigation, and eco-friendly solutions to optimize farming practices."
+    },
+    {
+      question: "How does the smart irrigation system work?",
+      answer: "Our smart irrigation system uses real-time soil moisture data to automatically adjust watering schedules, ensuring optimal water usage and plant health."
+    },
+    {
+      question: "Can I access my farm data remotely?",
+      answer: "Yes, AgroBioSync provides a user-friendly web interface that allows you to view your farm data from anywhere in the world."
+    },
+    {
+      question: "What makes AgroBioSync eco-friendly?",
+      answer: "AgroBioSync promotes sustainable farming practices by optimizing resource use, reducing water waste, and utilizing organic fertilizers to minimize environmental impact."
+    }
+  ];
   return (
     <div className="home-container">
       {/* Hero Section */}
@@ -204,7 +221,41 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Original Features Section remains the same */}
+      {/* Video Section */}
+      <section className="video-section">
+        <div className="section-container">
+          <h2 className="section-title">See AgroBioSync in Action</h2>
+          <div className="video-container">
+            <iframe 
+              src="https://www.youtube.com/embed/your-video-id" 
+              title="AgroBioSync Demo" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              allowFullScreen
+            ></iframe>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="faq-section">
+        <div className="section-container">
+          <h2 className="section-title">Frequently Asked Questions</h2>
+          <div className="faq-grid">
+            {faqs.map((faq, index) => (
+              <motion.div 
+                key={index} 
+                className="faq-item"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 * index }}
+              >
+                <h3 className="faq-question">{faq.question}</h3>
+                <p className="faq-answer">{faq.answer}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
     </div>
   );
 };
