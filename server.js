@@ -12,7 +12,7 @@ let latestSensorData = {
   IdealSoilTemp: 23,
   IdealAirTemp: 21,
   IdealHumidity: 65,
-  IdealSoilMoisture: 45
+  IdealSoilMoisture: 41
 };
 
 // Endpoint for NodeMCU to send data
