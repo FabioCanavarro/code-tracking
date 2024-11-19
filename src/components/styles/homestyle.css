@@ -408,7 +408,7 @@
 
 .video-container {
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  width: 500px;
+  width: 100vh;
   max-width: 800px;
   margin: 0 auto;
   aspect-ratio: 16 / 9;

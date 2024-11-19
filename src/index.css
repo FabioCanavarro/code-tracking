@@ -11,6 +11,12 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  --color-sage-green: #A3C4BC;
+  --color-mint-green: #D5E8E3;
+  --color-terracotta: #E6C0B0;
+  --color-sky-blue: #B8D8E3;
+  --color-light-peach: #F7D6C5;
+  --color-off-white: #F9F6F2;
 }
 
 body {
@@ -20,8 +26,9 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
-  background-color: white;
+  background-color: var(--color-off-white);
   color: #213547;
+
 }
 
 h1 {

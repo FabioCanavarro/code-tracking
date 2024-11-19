@@ -52,7 +52,7 @@ const int AirValue = 561;   //replace the value with value when placed in air us
 const int WaterValue = 310; //replace the value with value when placed in water using calibration code 
 
 // needed config for Fertilizer
-const int duration_before_fertlizer_in_hours=1 ;
+const int duration_before_fertlizer_in_hours=72 ;
 
 // Misc
 int soilMoistureValue = 0;
@@ -157,7 +157,7 @@ void loop() {
   if (WiFi.status() == WL_CONNECTED) {
     WiFiClient client;
     HTTPClient http;
-    String url = "http://192.168.18.15:3001/api/nodeMCU-data";
+    String url = "http://localhost:3001/api/nodeMCU-data";
     Serial.print("Connecting to: ");
     Serial.println(url);
     http.begin(client, url);
