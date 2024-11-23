@@ -717,13 +717,94 @@
 }
 /* FAQ Section */
 .faq-section {
-  
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-
-  border-radius: 2rem;
+  position: relative;
   padding: 6rem 2rem;
+  background-color: var(--color-neutral);
+  overflow: hidden;
   margin-bottom: 2rem;
-  background-color: white;
+}
+
+/* Organic dot pattern background */
+.faq-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(var(--color-border) 2px, transparent 2px),
+    radial-gradient(var(--color-border) 2px, transparent 2px);
+  background-size: 30px 30px;
+  background-position: 0 0, 15px 15px;
+  opacity: 0.15;
+  z-index: 0;
+}
+
+/* Gradient overlay */
+.faq-section::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 10% 90%, var(--color-accent) 0%, transparent 40%),
+    radial-gradient(circle at 90% 10%, var(--color-secondary) 0%, transparent 40%);
+  opacity: 0.05;
+  z-index: 0;
+}
+
+.faq-decoration {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='%234A8B2C' opacity='0.1' d='M90,50c0,22.1-17.9,40-40,40S10,72.1,10,50S27.9,10,50,10S90,27.9,90,50z M50,20 c-16.6,0-30,13.4-30,30s13.4,30,30,30s30-13.4,30-30S66.6,20,50,20z'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+.faq-decoration-left {
+  left: -150px;
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.faq-decoration-right {
+  right: -150px;
+  top: 50%;
+  transform: translateY(-50%) rotate(-45deg);
+}
+
+.faq-section .section-container {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  z-index: 1;
+}
+
+.faq-section .section-title {
+  position: relative;
+  text-align: center;
+  color: var(--color-text-primary);
+  margin-bottom: 3rem;
+  padding-bottom: 1rem;
+}
+
+.faq-section .section-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--color-secondary),
+    transparent
+  );
 }
 
 .faq-grid {
@@ -731,46 +812,95 @@
   grid-template-columns: repeat(2, 1fr);
   gap: 2rem;
   margin-top: 3rem;
+  position: relative;
+  z-index: 1;
 }
 
 .faq-item {
-  background-color: #f8fafc;
+  background: rgba(255, 255, 255, 0.9);
   padding: 2rem;
   border-radius: 1rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
   transition: all 0.3s ease;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .faq-item:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  box-shadow: 
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05),
+    0 0 0 1px var(--color-border);
 }
 
 .faq-question {
   font-size: 1.25rem;
   font-weight: 600;
-  color: #1f2937;
+  color: var(--color-text-primary);
   margin-bottom: 1rem;
+  position: relative;
+  padding-left: 2rem;
+}
+
+.faq-question::before {
+  content: 'Q:';
+  position: absolute;
+  left: 0;
+  color: var(--color-secondary);
+  font-weight: 700;
 }
 
 .faq-answer {
   font-size: 1rem;
-  color: #4b5563;
+  color: var(--color-text-secondary);
   line-height: 1.6;
+  position: relative;
+  padding-left: 2rem;
+}
+
+.faq-answer::before {
+  content: 'A:';
+  position: absolute;
+  left: 0;
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
+/* Animate background pattern */
+@keyframes patternFloat {
+  0% {
+    background-position: 0 0, 15px 15px;
+  }
+  100% {
+    background-position: 30px 30px, 45px 45px;
+  }
+}
+
+.faq-section::before {
+  animation: patternFloat 60s linear infinite;
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-  .video-section,
   .faq-section {
-    padding: 4rem 1.5rem;
+    padding: 4rem 1rem;
   }
 
   .faq-grid {
     grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
 
-  .video-container {
-    max-width: 100%;
+  .faq-decoration {
+    width: 200px;
+    height: 200px;
+  }
+
+  .faq-question {
+    font-size: 1.1rem;
   }
 }
