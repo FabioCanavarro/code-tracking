@@ -8,6 +8,50 @@ import './styles/navstyle.css';
 import "./styles/homestyle.css";
 import "./styles/pagestyle.css";
 
+const TreeVector = () => (
+  <svg className="absolute z-0" viewBox="0 0 800 600" style={{ opacity: 0.15 }}>
+    <g className="trees-left" transform="translate(50, 350)">
+      <path
+        d="M0,100 L30,0 L60,100 Z"
+        fill="#4CAF50"
+        opacity="0.6"
+      />
+      <path
+        d="M10,70 L40,-30 L70,70 Z"
+        fill="#81C784"
+        opacity="0.7"
+      />
+    </g>
+    <g className="trees-right" transform="translate(650, 320)">
+      <path
+        d="M0,120 L40,0 L80,120 Z"
+        fill="#4CAF50"
+        opacity="0.5"
+      />
+      <path
+        d="M20,90 L60,-40 L100,90 Z"
+        fill="#81C784"
+        opacity="0.6"
+      />
+    </g>
+    <g className="circuit-lines">
+      <path
+        d="M200,500 Q400,450 600,500"
+        stroke="#B2EBF2"
+        strokeWidth="2"
+        fill="none"
+        opacity="0.3"
+      />
+      <path
+        d="M150,450 Q400,400 650,450"
+        stroke="#80DEEA"
+        strokeWidth="2"
+        fill="none"
+        opacity="0.2"
+      />
+    </g>
+  </svg>
+);
 const Navbar = () => {
   const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -95,43 +139,43 @@ const Navbar = () => {
 };
 
 // HomePage
-const HomePage = () => {
+  const HomePage = () => {
   const features = [
     {
       title: "Real-Time Monitoring",
       description: "Track soil moisture, temperature, and humidity instantly with our advanced sensor technology.",
       icon: "📊",
-      color: "#4f46e5" // Indigo
+      color: "#43A047"
     },
     {
       title: "Smart Irrigation",
       description: "Automated watering systems that respond to real-time soil moisture data, saving water and improving efficiency.",
       icon: "💧",
-      color: "#0891b2" // Cyan
+      color: "#00ACC1"
     },
     {
       title: "Desktop And Mobile Compatible",
       description: "The Sleek Website is fully responsive and compatible with desktop and mobile devices.",
       icon: "💻📱",
-      color: "#7c3aed" // Violet
+      color: "#26A69A"
     },
     {
       title: "Global Reach",
       description: "View your farm from anywhere using our intuitive web interface.",
       icon: "🌍",
-      color: "#059669" // Emerald
+      color: "#66BB6A"
     },
     {
       title: "Smart Rebound System",
       description: "Be able to rebound the negative effect of the environment by negative feedback.",
       icon: "🌤",
-      color: "#ea580c" // Orange
+      color: "#26C6DA"
     },
     {
       title: "Eco-Friendly Solutions",
       description: "Sustainable farming practices optimized for minimal environmental impact and maximum yield.",
       icon: "🌱",
-      color: "#65a30d" // Lime
+      color: "#4DB6AC"
     }
   ];
   const faqs = [
@@ -153,51 +197,46 @@ const HomePage = () => {
     }
   ];
   return (
-    <div className="home-container">
+<div className="home-container">
       {/* Hero Section */}
-      <motion.section 
-        className="hero-section"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-      >
+      <section className="hero-section">
+        <TreeVector />
         <div className="hero-content">
           <motion.h1 
-            className="hero-title fade-in"
+            className="hero-title"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
+            transition={{ duration: 0.6 }}
           >
             Transform Your Farming with
             <span>AgroBioSync Today</span>
           </motion.h1>
           <motion.p 
-            className="hero-description fade-in fade-in-delay-1"
+            className="hero-description"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.4 }}
+            transition={{ delay: 0.3 }}
           >
-            AgroBioSync revolutionizes agriculture by automating farming processes and promoting eco-friendly practices with our innovative organic fertilizer. Experience real-time analytics from anywhere, ensuring your farm operates at peak efficiency.
+            Experience the future of sustainable agriculture with our innovative smart farming solutions.
           </motion.p>
           <motion.div
+            className="hero-button-container"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6 }}
           >
             <Link to="/dashboard" className="hero-button">
               View Dashboard
-              <ArrowRight className="icon-right" />
+              <ArrowRight className="button-icon" />
             </Link>
           </motion.div>
         </div>
-      </motion.section>
+      </section>
 
-      {/* Key Features Section */}
-      <section className="key-features-section">
-        <div className="section-container">
-          <h2 className="section-title">Key Features</h2>
-          <p className="section-subtitle">Discover how AgroBioSync can transform your farming operations</p>
-          
+      {/* Features Grid */}
+      <section className="features-section">
+        <div className="features-container">
+          <h2 className="features-title">Key Features</h2>
           <div className="features-grid">
             {features.map((feature, index) => (
               <motion.div
@@ -205,22 +244,17 @@ const HomePage = () => {
                 className="feature-card"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 + index * 0.1 }}
-                style={{
-                  borderColor: feature.color,
-                }}
+                transition={{ delay: index * 0.1 }}
+                style={{ '--feature-color': feature.color }}
               >
-                <div className="feature-icon" style={{ backgroundColor: `${feature.color}15`, color: feature.color }}>
-                  {feature.icon}
-                </div>
-                <h3 className="feature-title" style={{ color: feature.color }}>{feature.title}</h3>
+                <div className="feature-icon">{feature.icon}</div>
+                <h3 className="feature-title">{feature.title}</h3>
                 <p className="feature-description">{feature.description}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
-
       {/* Video Section */}
       <section className="video-section">
         <div className="section-container">

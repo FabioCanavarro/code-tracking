@@ -11,13 +11,28 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  --color-sage-green: #A3C4BC;
-  --color-mint-green: #D5E8E3;
-  --color-terracotta: #E6C0B0;
-  --color-sky-blue: #B8D8E3;
-  --color-light-peach: #F7D6C5;
-  --color-off-white: #F9F6F2;
+  /* Core color palette */
+  --color-primary: #2D5A27;     /* Deep forest green */
+  --color-secondary: #4A8B2C;   /* Vibrant leaf green */
+  --color-accent: #93C572;      /* Soft sage */
+  --color-neutral: #F4F9F1;     /* Light mint */
+  --color-dark: #1A3A1A;        /* Dark forest */
+  --color-white: #FFFFFF;
+  
+  /* Extended palette for various uses */
+  --color-background: #E8F3E3;  /* Light sage background */
+  --color-surface: #F7FAF5;     /* Off-white surface */
+  --color-border: #C7E1BA;      /* Soft green border */
+  --color-text-primary: #1A3A1A;    /* Dark green text */
+  --color-text-secondary: #4A8B2C;  /* Medium green text */
+  --color-text-tertiary: #6B8E23;   /* Olive text */
+  --color-shadow: rgba(45, 90, 39, 0.15);  /* Green-tinted shadow */
+  
+  /* Glass effects */
+  --color-glass: rgba(255, 255, 255, 0.15);
+  --color-glass-border: rgba(255, 255, 255, 0.2);
 }
+
 
 body {
   margin: 0;
@@ -26,8 +41,8 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
-  background-color: var(--color-off-white);
-  color: #213547;
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
 
 }
 

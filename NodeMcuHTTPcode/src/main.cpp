@@ -133,7 +133,6 @@ digitalWrite(water_pump,HIGH);
 
     if(!res) {
         Serial.println("Failed to connect");
-        res = wm.autoConnect("AgroBioSync","agrobiosync");
         ESP.restart();
     } 
     else {
