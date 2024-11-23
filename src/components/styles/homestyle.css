@@ -91,7 +91,7 @@
   display: inline-flex;
   align-items: center;
   padding: 1.2rem 2.5rem;
-  background: linear-gradient(45deg, var(--color-primary), var(--color-secondary));
+  background: linear-gradient(45deg, #4f46e5, #7c3aed);
   color: var(--color-white);
   text-decoration: none;
   border-radius: 5px;
@@ -99,15 +99,19 @@
   font-size: 1.1rem;
   transition: all 0.3s ease;
   border: 2px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 
+    0 0px 30px 1px  #4f46e5, 
+    8px -16px 54px -8px  #4f46e5,
+    -32px 28px 54px -10px  #4f46e5,
+    -48px -32px 54px 2px  #4f46e5, 
+    32px 8px 80px 2px  #4f46e5;
 }
 
 .hero-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-  background: linear-gradient(45deg, var(--color-secondary), var(--color-accent));
+  background: linear-gradient(45deg, #4338ca, #6d28d9);
+  box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.3);
 }
-
 
 
 .feature-title {
@@ -236,8 +240,6 @@
   text-align: center;
   position: relative;
   overflow: hidden;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
 }
 .feature-card::before {
   content: '';
@@ -257,10 +259,9 @@
 }
 
 .feature-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 
-    0 10px 30px rgba(46, 125, 50, 0.1),
-    0 0 0 1px rgba(74, 139, 44, 0.1);
+  transform: translateY(-10px);
+  box-shadow: -8px 10px 25px -8px rgba(0,0,0,0.5);
+  transform: scale(1.1);
 }
 .feature-card:hover::before {
   opacity: 1;
@@ -513,10 +514,7 @@
 
 
 
-.feature-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-}
+
 
 .feature-icon {
   font-size: 2rem;
@@ -537,15 +535,7 @@
 }
 
 /* Hero section enhancements */
-.hero-button {
-  background: linear-gradient(45deg, #4f46e5, #7c3aed);
-  transition: all 0.3s ease;
-}
 
-.hero-button:hover {
-  background: linear-gradient(45deg, #4338ca, #6d28d9);
-  box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.3);
-}
 
 /* Responsive adjustments */
 @media (max-width: 1024px) {
@@ -577,7 +567,7 @@
   transition: transform 0.3s ease;
 }
 
-.feature-card:hover .feature-icon {
+.feature-icon {
   transform: scale(1.1);
 }
 .video-section .section-title {
@@ -615,7 +605,6 @@
   opacity: 0.1;
 }
 .video-container {
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
   width: 100vh;
   max-width: 800px;
   margin: 0 auto;
@@ -722,6 +711,7 @@
   background-color: var(--color-neutral);
   overflow: hidden;
   margin-bottom: 2rem;
+  border-radius: 1rem;
 }
 
 /* Organic dot pattern background */
