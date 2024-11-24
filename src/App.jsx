@@ -1,4 +1,4 @@
-import './App.css';
+import './dashboard.css';
 import './ChartStyles.css';
 import './components/styles/navstyle.css';
 import './components/styles/homestyle.css';

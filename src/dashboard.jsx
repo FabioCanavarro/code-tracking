@@ -1,4 +1,4 @@
-import './App.css';
+import './dashboard.css';
 import './ChartStyles.css';
 import React, { useState, useEffect } from 'react';
 import { Thermometer, Droplet, Wind, Sprout } from 'lucide-react';
