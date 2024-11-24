@@ -1,5 +1,7 @@
 /* Dashboard.css */
 
+/* Dashboard.css */
+
 .dashboard {
   position: absolute;
   top: 0px;
@@ -7,57 +9,57 @@
   min-height: 100vh;
   background-color: #f3f4f6;
   width: 100%;
-  padding: 5rem;
+  padding: 5rem 1rem 1rem 1rem; /* Reduced padding for mobile */
 }
 
 .dashboard-container {
   max-width: 100%;
   margin: 0 auto;
   background: white;
-  border-radius: 1rem;
+  border-radius: 0.5rem; /* Smaller border radius for mobile */
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
   overflow: hidden;
 }
 
 .dashboard-content {
-  padding: 2rem;
+  padding: 1rem; /* Reduced padding for mobile */
 }
 
 .dashboard-title {
-  font-size: 1.875rem;
+  font-size: 1.5rem; /* Smaller font for mobile */
   font-weight: 600;
   color: #111827;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   text-align: center;
 }
 
 .factors-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* Changed to 2 columns */
-  gap: 2rem;
+  grid-template-columns: 1fr; /* Single column for mobile */
+  gap: 1rem; /* Reduced gap for mobile */
 }
 
 .factor-card {
   background-color: white;
   border: 1px solid #e5e7eb;
-  border-radius: 0.75rem;
+  border-radius: 0.5rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  height: 100%;
+  height: auto; /* Allow height to adjust */
 }
 
 .factor-content {
-  padding: 1.5rem;
+  padding: 1rem;
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.75rem;
   border-bottom: 1px solid #e5e7eb;
 }
 
 .factor-icon {
-  width: 3rem;
-  height: 3rem;
-  border-radius: 0.5rem;
+  width: 2.5rem; /* Slightly smaller icons for mobile */
+  height: 2.5rem;
+  border-radius: 0.375rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -70,8 +72,8 @@
 .factor-icon.brown { background-color: #8b4513; }
 
 .icon {
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.25rem;
+  height: 1.25rem;
   color: white;
 }
 
@@ -89,30 +91,33 @@
 .factor-values {
   display: flex;
   align-items: baseline;
-  gap: 1rem;
+  gap: 0.75rem;
+  flex-wrap: wrap; /* Allow values to wrap on very small screens */
 }
 
 .current-value {
-  font-size: 1.5rem;
+  font-size: 1.25rem; /* Smaller font for mobile */
   font-weight: 600;
   color: #111827;
 }
 
 .ideal-value {
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   font-weight: 500;
   color: #10b981;
 }
 
 .factor-chart {
-  padding: 1.5rem;
-  height: 300px; /* Fixed height for charts */
+  padding: 1rem;
+  height: 250px; /* Smaller height for mobile */
   width: 100%;
 }
 
-/* Style the chart elements */
+/* Chart responsive styles */
 .recharts-wrapper {
-  width: 100% !important; /* Force full width */
+  width: 100% !important;
+  height: 100% !important;
+  min-width: 0; /* Allow chart to shrink */
 }
 
 .recharts-surface {
@@ -131,14 +136,14 @@
 
 .recharts-cartesian-axis-tick-value {
   fill: #6b7280;
-  font-size: 12px;
+  font-size: 10px; /* Smaller font for axis labels */
 }
 
 .custom-tooltip {
   background-color: white;
   border: 1px solid #e5e7eb;
   border-radius: 0.375rem;
-  padding: 0.75rem;
+  padding: 0.5rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -154,27 +159,58 @@
   color: #111827;
 }
 
-/* Error notification */
 .error-notification {
   background-color: #fef3c7;
   border-left: 4px solid #f59e0b;
-  padding: 1rem;
-  margin-bottom: 1.5rem;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
   border-radius: 0.375rem;
+  font-size: 0.875rem;
 }
 
-
-
-@media (max-width: 100%) {
-  .factors-grid {
-    grid-template-columns: 1fr;
+/* Tablet breakpoint */
+@media (min-width: 768px) {
+  .dashboard {
+    padding: 5rem 2rem 2rem 2rem;
   }
   
-  .dashboard {
-    padding: 1rem;
+  .dashboard-title {
+    font-size: 1.875rem;
   }
-
+  
+  .factors-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+  
   .dashboard-content {
-    padding: 1rem;
+    padding: 1.5rem;
+  }
+  
+  .factor-chart {
+    height: 300px;
+  }
+  
+  .recharts-cartesian-axis-tick-value {
+    font-size: 12px;
+  }
+}
+
+/* Desktop breakpoint */
+@media (min-width: 1024px) {
+  .dashboard {
+    padding: 5rem;
+  }
+  
+  .factors-grid {
+    gap: 2rem;
+  }
+  
+  .dashboard-content {
+    padding: 2rem;
+  }
+  
+  .factor-chart {
+    height: 300px;
   }
 }
