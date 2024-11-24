@@ -1,5 +1,5 @@
 // Navbar.jsx
-import React, { useState , useEffect } from 'react';
+import React, { useState , useEffect , useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Menu, X, ArrowRight, Phone, MapPin, Mail,  ExternalLink} from 'lucide-react'; 
@@ -8,50 +8,7 @@ import './styles/navstyle.css';
 import "./styles/homestyle.css";
 import "./styles/pagestyle.css";
 
-const TreeVector = () => (
-  <svg className="absolute z-0" viewBox="0 0 800 600" style={{ opacity: 0.15 }}>
-    <g className="trees-left" transform="translate(50, 350)">
-      <path
-        d="M0,100 L30,0 L60,100 Z"
-        fill="#4CAF50"
-        opacity="0.6"
-      />
-      <path
-        d="M10,70 L40,-30 L70,70 Z"
-        fill="#81C784"
-        opacity="0.7"
-      />
-    </g>
-    <g className="trees-right" transform="translate(650, 320)">
-      <path
-        d="M0,120 L40,0 L80,120 Z"
-        fill="#4CAF50"
-        opacity="0.5"
-      />
-      <path
-        d="M20,90 L60,-40 L100,90 Z"
-        fill="#81C784"
-        opacity="0.6"
-      />
-    </g>
-    <g className="circuit-lines">
-      <path
-        d="M200,500 Q400,450 600,500"
-        stroke="#B2EBF2"
-        strokeWidth="2"
-        fill="none"
-        opacity="0.3"
-      />
-      <path
-        d="M150,450 Q400,400 650,450"
-        stroke="#80DEEA"
-        strokeWidth="2"
-        fill="none"
-        opacity="0.2"
-      />
-    </g>
-  </svg>
-);
+
 const Navbar = () => {
   const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -137,9 +94,121 @@ const Navbar = () => {
     </motion.nav>
   );
 };
+// ember animation
+const EmbersCanvas = ({ 
+  color = 'rgba(255, 69, 0, 0.7)', // Default orange-red
+  count = 230,
+  maxSize = 4,
+  minSize = 1,
+  maxSpeed = 8,
+  minSpeed = 0.5
+}) => {
+  const canvasRef = useRef(null);
+  const animationRef = useRef(null);
+  const embersRef = useRef([]);
 
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    
+    const ctx = canvas.getContext('2d');
+
+    const updateCanvasSize = () => {
+      if (!canvas) return;
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+
+    const emberSettings = {
+      maxSize,
+      minSize,
+      maxSpeed,
+      minSpeed,
+      color,
+    };
+
+    class Ember {
+      constructor() {
+        this.reset();
+      }
+
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = canvas.height + Math.random() * 100;
+        this.size = emberSettings.minSize + Math.random() * (emberSettings.maxSize - emberSettings.minSize);
+        this.speed = emberSettings.minSpeed + Math.random() * (emberSettings.maxSpeed - emberSettings.minSpeed);
+        this.opacity = 1;
+        this.fadeRate = Math.random() * 0.02 + 0.005;
+        this.color = emberSettings.color;
+      }
+
+      update() {
+        this.y -= this.speed;
+        this.opacity -= this.fadeRate;
+        if (this.opacity <= 0) {
+          this.reset();
+        }
+      }
+
+      draw(context) {
+        context.beginPath();
+        context.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        // Extract base color and apply current opacity
+        const baseColor = this.color.substring(0, this.color.lastIndexOf(','));
+        context.fillStyle = `${baseColor}, ${this.opacity.toFixed(2)})`;
+        context.fill();
+      }
+    }
+
+    const initializeEmbers = () => {
+      embersRef.current = [];
+      for (let i = 0; i < count; i++) {
+        embersRef.current.push(new Ember());
+      }
+    };
+
+    const animate = () => {
+      if (!canvas || !ctx) return;
+      
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      embersRef.current.forEach(ember => {
+        ember.update();
+        ember.draw(ctx);
+      });
+      animationRef.current = requestAnimationFrame(animate);
+    };
+
+    // Initialize
+    updateCanvasSize();
+    window.addEventListener('resize', updateCanvasSize);
+    initializeEmbers();
+    animate();
+
+    // Cleanup
+    return () => {
+      window.removeEventListener('resize', updateCanvasSize);
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
+    };
+  }, [color, count, maxSize, minSize, maxSpeed, minSpeed]);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      className="absolute top-0 left-0 w-full h-full z-[2] pointer-events-none"
+      style={{ background: 'transparent' }}
+    />
+  );
+};
 // HomePage
   const HomePage = () => {
+    const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    return () => setMounted(false);
+  }, []);
   const features = [
     {
       title: "Real-Time Monitoring",
@@ -200,7 +269,7 @@ const Navbar = () => {
 <div className="home-container">
       {/* Hero Section */}
       <section className="hero-section">
-        <TreeVector />
+      {mounted && <EmbersCanvas color="rgba(0, 150, 255, 0.7)" />}
         <div className="hero-content">
           <motion.h1 
             className="hero-title"
