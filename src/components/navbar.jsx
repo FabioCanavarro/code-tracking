@@ -97,7 +97,7 @@ const Navbar = () => {
 // ember animation
 const EmbersCanvas = ({ 
   color = 'rgba(255, 69, 0, 0.7)', // Default orange-red
-  count = 230,
+  count = 231,
   maxSize = 4,
   minSize = 1,
   maxSpeed = 8,
