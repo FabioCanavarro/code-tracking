@@ -330,7 +330,7 @@ const EmbersCanvas = ({
           <h2 className="section-title">See AgroBioSync in Action</h2>
           <div className="video-container">
             <iframe 
-              src="https://youtube.com/embed/fezO9C1DY4g" 
+              src="https://youtube.com/embed/WkTEt4o0jq4" 
               title="AgroBioSync Demo" 
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
               allowFullScreen
