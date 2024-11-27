@@ -263,6 +263,13 @@ const EmbersCanvas = ({
     {
       question: "What makes AgroBioSync eco-friendly?",
       answer: "AgroBioSync promotes sustainable farming practices by optimizing resource use, reducing water waste, and utilizing organic fertilizers to minimize environmental impact."
+    },{
+      question: "Can I control my farm from my phone?",
+      answer: "Unfortunately, because of the strict time frame,it is a work in progress, but we are working on it."
+    },
+    {
+      question: "What kind of support do you offer?",
+      answer: "We provide 24/7 technical support, regular system maintenance, comprehensive training for new users, and ongoing consultation to help you get the most out of your AgroBioSync system."
     }
   ];
   return (
