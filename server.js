@@ -1,6 +1,14 @@
 import express from "express"
+import cors from "cors"; // Add this import at the top
+
 const app = express();
 const port = 3001;
+
+// Add CORS middleware here, right after creating the app
+app.use(cors({
+  origin: 'http://localhost:5173', // Your React app's URL
+  credentials: true
+}));
 
 app.use(express.json());
 
@@ -27,13 +35,12 @@ app.post('/api/nodeMCU-data', (req, res) => {
     Humidity,
     SoilMoisture
   };
-
   console.log('Received data from NodeMCU:', latestSensorData);
   res.status(200).json({ message: 'Data received successfully' });
 });
 
 // Endpoint for React app to get the latest sensor data
-app.post('/api/sensor-data', (req, res) => {
+app.get('/api/sensor-data', (req, res) => { // Changed from POST to GET
   res.json(latestSensorData);
 });
 

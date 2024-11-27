@@ -17,7 +17,7 @@ const App = () => {
             <Route path="/" element={<HomePage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/contact" element={<ContactPage />} />
-            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/dashboard" element={<Dashboard baseUrl="http://localhost:3001/api/sensor-data" />} />
           </Routes>
         </main>
       </div>

@@ -8,6 +8,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
     "start": "concurrently --kill-others \"vite\" \"node server.js\"",
+    "startrevhost": "concurrently --kill-others \"vite --host\" \"node server.js\"",
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",

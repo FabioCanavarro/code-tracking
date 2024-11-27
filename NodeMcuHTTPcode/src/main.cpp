@@ -20,6 +20,7 @@ Combined command:
 */
 
 
+
 //*Pins and Setup
 // initiating the Pins
 // receiving Pins
@@ -71,12 +72,11 @@ int humidity;
 int soilMoisture;
 int timer = millis();
 
-
-
-
-
-
-
+// Needed config for wifi
+String url = "http://localhost:3001/api/nodeMCU-data";
+WiFiServer server(80);
+String username = "AgroBioSync";
+String password = "GreenSync";
 
 
 //*Functions
@@ -94,7 +94,6 @@ int readDS18B20(){
   }
   
 }
-
 
 int read_hygrometer(){
   soilMoistureValue = analogRead(HYGROGENATOR_PIN);  // put Sensor insert into soil
@@ -117,7 +116,6 @@ int read_hygrometer(){
 }
 
 
-WiFiServer server(80);
 
 void setup() {
 digitalWrite(fertilizer_pump,HIGH);
@@ -129,7 +127,7 @@ digitalWrite(water_pump,HIGH);
     wm.setConfigPortalTimeout(1000000000);
     wm.setBreakAfterConfig(false);
     bool res;
-    res = wm.autoConnect("AgroBioSync","agrobiosync");
+    res = wm.autoConnect(username,password);
 
     if(!res) {
         Serial.println("Failed to connect");
@@ -156,14 +154,12 @@ void loop() {
   if (WiFi.status() == WL_CONNECTED) {
     WiFiClient client;
     HTTPClient http;
-    String url = "http://localhost:3001/api/nodeMCU-data";
     Serial.print("Connecting to: ");
     Serial.println(url);
     http.begin(client, url);
     http.addHeader("Content-Type", "application/json");
 
   currentsecond= second();
-
   // Wait a few seconds between measurements.
   
 

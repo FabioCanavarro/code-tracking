@@ -13,7 +13,7 @@ import {
   ReferenceLine
 } from 'recharts';
 
-const Dashboard = () => {
+const Dashboard = ({ baseUrl = 'http://localhost:3001/api/sensor-data' }) => {
   const [sensorData, setSensorData] = useState(null);
   const [error, setError] = useState(null);
   const [historicalData, setHistoricalData] = useState({
@@ -58,24 +58,55 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('/api/sensor-data');
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
+        // Generate mock data instead of fetching when endpoint is not available
+        const mockData = {
+          SoilTemp: 25 + Math.random() * 2 - 1,
+          AirTemp: 22 + Math.random() * 2 - 1,
+          Humidity: 60 + Math.random() * 4 - 2,
+          SoilMoisture: 40 + Math.random() * 4 - 2,
+          IdealSoilTemp: 23,
+          IdealAirTemp: 21,
+          IdealHumidity: 65,
+          IdealSoilMoisture: 45
+        };
+
+        try {
+          const response = await fetch(baseUrl, {
+            method: 'GET',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+            credentials: 'include', // Include cookies if needed
+            mode: 'cors'
+          });
+
+          if (response.ok) {
+            const data = await response.json();
+            setSensorData(data);
+            setError(null);
+          } else {
+            // If API fails, use mock data
+            setSensorData(mockData);
+            setError('Using simulated data - API endpoint not available');
+          }
+        } catch (fetchError) {
+          // If fetch fails completely, use mock data
+          setSensorData(mockData);
+          setError('Using simulated data - API connection failed');
         }
-        const data = await response.json();
-        setSensorData(data);
-        setError(null);
 
         const currentTime = Date.now();
 
         setHistoricalData(prevData => {
           const newData = { ...prevData };
           Object.keys(newData).forEach(key => {
-            if (data[key] !== undefined) {
+            if (sensorData?.[key] !== undefined || mockData[key] !== undefined) {
+              const value = sensorData?.[key] ?? mockData[key];
               // Add new data point
               const newPoint = {
                 time: currentTime,
-                value: data[key],
+                value: value,
                 displayTime: new Date().toLocaleTimeString()
               };
 
@@ -91,8 +122,8 @@ const Dashboard = () => {
           return newData;
         });
       } catch (error) {
-        setError('Failed to fetch sensor data. Using placeholder values.');
-        console.error('There was a problem with the fetch operation:', error);
+        console.error('Error in data handling:', error);
+        setError('Error in data handling. Using placeholder values.');
       }
     };
 
@@ -100,8 +131,9 @@ const Dashboard = () => {
     const interval = setInterval(fetchData, 2000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [baseUrl, sensorData]);
 
+  // Rest of the component remains exactly the same...
   const factors = [
     { 
       name: 'Soil Temp', 
@@ -145,6 +177,7 @@ const Dashboard = () => {
     }
   ];
 
+  // Rest of the JSX remains exactly the same...
   const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
       return (
