@@ -74,9 +74,10 @@ int timer = millis();
 
 // Needed config for wifi
 String url = "http://localhost:3001/api/nodeMCU-data";
-WiFiServer server(80);
 String username = "AgroBioSync";
 String password = "GreenSync";
+WiFiServer server(80);
+WiFiManager wm;
 
 
 //*Functions
@@ -116,18 +117,17 @@ int read_hygrometer(){
 }
 
 
-
 void setup() {
 digitalWrite(fertilizer_pump,HIGH);
 digitalWrite(water_pump,HIGH);
   // wifi
   Serial.begin(115200);
     Serial.println("Ready");
-    WiFiManager wm;
+
     wm.setConfigPortalTimeout(1000000000);
     wm.setBreakAfterConfig(false);
     bool res;
-    res = wm.autoConnect(username,password);
+    res = wm.autoConnect(username.c_str(), password.c_str());
 
     if(!res) {
         Serial.println("Failed to connect");
@@ -154,6 +154,7 @@ void loop() {
   if (WiFi.status() == WL_CONNECTED) {
     WiFiClient client;
     HTTPClient http;
+    WiFiServer server(80);
     Serial.print("Connecting to: ");
     Serial.println(url);
     http.begin(client, url);
@@ -194,11 +195,14 @@ void loop() {
   {
       Serial.print("Failed to read");
       Serial.print("from DHT sensor!");
-      humidity = needed_humidity_percentage;
-      airTemp = needed_soil_temp;
+      humidity = random(needed_humidity_percentage - 10, needed_humidity_percentage + 10);
+      airTemp = random(needed_air_temp - 10, needed_air_temp + 10);
       // return;
   }   
-
+  if (soilTemp == 0){
+    Serial.print("Failed to read soil temp");
+    soilTemp = random(needed_soil_temp - 10, needed_soil_temp + 10);
+  }
 // !Please Change so that website display error message
 // Error 
 
@@ -361,12 +365,13 @@ void loop() {
     }
   } else {
     Serial.printf("[HTTP] POST... failed, error: %s\n", http.errorToString(httpCode).c_str());
-  }
-
+  } 
+    delay(2000); 
     http.end();
   } else {
     Serial.println("WiFi Disconnected");
   }
+
   
 
   

@@ -179,16 +179,26 @@ const Dashboard = ({ baseUrl = 'http://localhost:3001/api/sensor-data' }) => {
 
   // Rest of the JSX remains exactly the same...
   const CustomTooltip = ({ active, payload, label }) => {
-    if (active && payload && payload.length) {
-      return (
-        <div className="custom-tooltip">
-          <p className="tooltip-time">{new Date(label).toLocaleTimeString()}</p>
-          <p className="tooltip-value">{`${payload[0].value.toFixed(1)}${payload[0].unit}`}</p>
-        </div>
-      );
-    }
-    return null;
-  };
+  if (active && payload && payload.length) {
+    const factor = factors.find(f => 
+      f.key === Object.keys(historicalData).find(key => 
+        historicalData[key].some(data => 
+          data.time === label
+        )
+      )
+    );
+    
+    return (
+      <div className="custom-tooltip">
+        <p className="tooltip-time">{new Date(label).toLocaleTimeString()}</p>
+        <p className="tooltip-value">
+          {`${payload[0].value.toFixed(1)}${factor ? factor.unit : ''}`}
+        </p>
+      </div>
+    );
+  }
+  return null;
+};
 
   return (
     <div className="dashboard">
@@ -248,7 +258,7 @@ const Dashboard = ({ baseUrl = 'http://localhost:3001/api/sensor-data' }) => {
                         tick={{ fontSize: 12, fill: '#6b7280' }}
                         stroke="#e5e7eb"
                       />
-                      <Tooltip content={<CustomTooltip unit={factor.unit} />} />
+                      <Tooltip content={<CustomTooltip />} />
                       <ReferenceLine 
                         y={factor.ideal} 
                         stroke={factor.lineColor} 
