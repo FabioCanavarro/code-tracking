@@ -41,13 +41,14 @@ Link: **https://agrobiosync.netlify.app/**
 ### DashBoard
 ![image](https://github.com/user-attachments/assets/91840514-6dd0-4deb-bfc0-0381b3a2f146)
 
-## How To Run
+## How To Run Locally
 1. Change all Variables to fit your needs.
 2. Ensure that the NodeMCU is plugged in.
 3. Ensure that platformio.exe is in your PATH environmental variable.
 4. Open a new terminal and run `cd NodeMcuHTTPcode; platformio run --target upload; platformio device monitor --baud 115200`.
-5. In a new terminal run `npm run start`.
-6. Open <a href="http://localhost:5173/">http://localhost:5173/</a>.
+5. Use any device to sign the NodeMCU to your wifi.
+6. In a new terminal run `npm run start`.
+7. Open <a href="http://localhost:5173/">http://localhost:5173/</a>.
 
 
 
