@@ -265,7 +265,7 @@ const EmbersCanvas = ({
       answer: "AgroBioSync promotes sustainable farming practices by optimizing resource use, reducing water waste, and utilizing organic fertilizers to minimize environmental impact."
     },{
       question: "Can I control my farm from my phone?",
-      answer: "Unfortunately, because of the strict time frame,it is a work in progress, but we are working on it."
+      answer: "Unfortunately, because of the strict time frame, It is a work in progress, but we are working on it."
     },
     {
       question: "What kind of product does our package provide?",
@@ -336,12 +336,11 @@ const EmbersCanvas = ({
         <div className="section-container">
           <h2 className="section-title">See AgroBioSync in Action</h2>
           <div className="video-container">
-            <iframe 
-              src="https://youtube.com/embed/WkTEt4o0jq4" 
-              title="AgroBioSync Demo" 
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-              allowFullScreen
-            ></iframe>
+          <iframe src="https://www.youtube.com/embed/BORNso5n_5s?vq=hd1080&modestbranding=1&rel=0&iv_load_policy=3"
+              title="AgroBioSync - Organic Fertilizer & Plant-Regulating Machine [Fundemental Research]" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+              ></iframe>
           </div>
         </div>
       </section>
