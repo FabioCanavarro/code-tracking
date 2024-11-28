@@ -60,10 +60,10 @@ const Dashboard = ({ baseUrl = 'http://localhost:3001/api/sensor-data' }) => {
       try {
         // Generate mock data instead of fetching when endpoint is not available
         const mockData = {
-          SoilTemp: 25 + Math.random() * 2 - 1,
-          AirTemp: 22 + Math.random() * 2 - 1,
-          Humidity: 60 + Math.random() * 4 - 2,
-          SoilMoisture: 40 + Math.random() * 4 - 2,
+          SoilTemp: 25,
+          AirTemp: 22,
+          Humidity: 602,
+          SoilMoisture: 40,
           IdealSoilTemp: 23,
           IdealAirTemp: 21,
           IdealHumidity: 65,
