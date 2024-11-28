@@ -29,7 +29,11 @@ The product consist of 2 main subproduct:
 ## Website
 Link: **https://agrobiosync.netlify.app/**
 ### HomePage Start 
-![image](https://github.com/user-attachments/assets/d75fe863-19b4-4f79-a3a0-e0f1e84d1864)
+![image](https://github.com/user-attachments/assets/c6b1117c-fbc9-4593-af2b-c50b8068eb1b)
+![image](https://github.com/user-attachments/assets/3092fb9f-955b-47f4-b9ee-4f648239eaf0)
+![image](https://github.com/user-attachments/assets/dbfa9c2a-af5f-4a72-80df-79f1643d068d)
+
+
 ### Contact Us
 ![image](https://github.com/user-attachments/assets/4f63b2a8-612a-4482-b630-713fad739915)
 ### About Us
