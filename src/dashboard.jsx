@@ -62,7 +62,7 @@ const Dashboard = ({ baseUrl = 'http://localhost:3001/api/sensor-data' }) => {
         const mockData = {
           SoilTemp: 25,
           AirTemp: 22,
-          Humidity: 602,
+          Humidity: 60,
           SoilMoisture: 40,
           IdealSoilTemp: 23,
           IdealAirTemp: 21,
