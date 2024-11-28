@@ -268,8 +268,8 @@ const EmbersCanvas = ({
       answer: "Unfortunately, because of the strict time frame,it is a work in progress, but we are working on it."
     },
     {
-      question: "What kind of support do you offer?",
-      answer: "We provide 24/7 technical support, regular system maintenance, comprehensive training for new users, and ongoing consultation to help you get the most out of your AgroBioSync system."
+      question: "What kind of product does our package provide?",
+      answer: "We provide a complete package of the organic fertilizer, along with a machine that can be used for agricultural technology solutions, including real-time monitoring, smart irrigation, and eco-friendly solutions."
     }
   ];
   return (
