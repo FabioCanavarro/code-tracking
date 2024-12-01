@@ -371,6 +371,58 @@ const EmbersCanvas = ({
 
 
 // AboutPage
+const teamMembers = [
+  {
+    name: "Fabio",
+    position: "Team Leader & Lead Developer",
+    description: "Lead developer and project lead with expertise in IOT technology. Leading research in sustainable farming practices and overseeing the development of AgroBioSync's core technologies.",
+    specialty: "Project Management & Software Development",
+    imageUrl: "/api/placeholder/300/300"
+  },
+  {
+    name: "Melville",
+    position: "Vice Team Leader & Lead Designer",
+    description: "Vice Project lead with expertise in designing and testing.",
+    specialty: "3D Modeling & Prototyping",
+    imageUrl: "/api/placeholder/300/300"
+  },
+  {
+    name: "Sheikha",
+    position: "Lead Media Marketer",
+    description: "Media Marketer with expertise in marketing and communication. Developing and implementing marketing strategies to promote AgroBioSync's products and services.",
+    specialty: "Digital Marketing & Brand Management",
+    imageUrl: "/api/placeholder/300/300"
+  },
+  {
+    name: "Samuel",
+    position: "Agricultural Data Scientist",
+    description: "Full-stack developer specializing in agricultural monitoring systems.",
+    specialty: "Data Analytics & Visualization",
+    imageUrl: "/api/placeholder/300/300"
+  },
+  {
+    name: "Daniel",
+    position: "Senior Engineer",
+    description: "Engineer with expertise in building and implementing the hardware infrastructure for smart farming solutions.",
+    specialty: "Sensor Networks & Hardware Integration",
+    imageUrl: "/api/placeholder/300/300"
+  },
+  {
+    name: "Nara",
+    position: "Senior Designer",
+    description: "Designer with expertise in creating visually appealing advertising materials and visual design.",
+    specialty: "Interface Design & User Research",
+    imageUrl: "/api/placeholder/300/300"
+  },
+  {
+    name: "Hewitt",
+    position: "Engineer",
+    description: "Engineer with expertise in developing and implementing hardware solutions.",
+    specialty: "Implementation Of Hardware",
+    imageUrl: "/api/placeholder/300/300"
+  }
+];
+
 const AboutPage = () => {
   return (
     <div className="page-container">
@@ -386,18 +438,53 @@ const AboutPage = () => {
           <div className="page-sections">
             <section className="page-section fade-in fade-in-delay-1">
               <h2 className="section-title">Our Mission</h2>
-              <p className="page-text">
-                At AgroBioSync, were committed to revolutionizing agriculture through sustainable technology and innovative solutions. 
-                Our mission is to empower farmers with the tools they need to maximize efficiency while minimizing environmental impact.
-              </p>
+              <div className="mission-content">
+                <div className="mission-text">
+                  <p className="page-text">
+                    At AgroBioSync, we're revolutionizing agriculture through sustainable technology and innovative solutions. 
+                    Our mission is to empower farmers with cutting-edge tools while maintaining ecological balance.
+                  </p>
+
+                </div>
+              </div>
             </section>
             
+
             <section className="page-section fade-in fade-in-delay-2">
-              <h2 className="section-title">Our Story</h2>
-              <p className="page-text">
-                Founded by a team of agricultural experts and technology innovators, AgroBioSync emerged from a shared vision of 
-                transforming traditional farming practices into sustainable, data-driven operations.
+              <h2 className="section-title">Meet Our Team</h2>
+              <p className="team-intro">
+                Our diverse team brings together expertise in agriculture, technology, and sustainable development.
               </p>
+              <div className="team-grid">
+                {teamMembers.map((member, index) => (
+                  <motion.div
+                    key={index}
+                    className="team-card"
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.1 * index }}
+                  >
+                    <div className="team-image-container">
+                      <img
+                        src={member.imageUrl}
+                        alt={member.name}
+                        className="team-image"
+                      />
+                    </div>
+                    <div className="team-content">
+                      <h3 className="team-name">{member.name}</h3>
+                      <p className="team-position">{member.position}</p>
+                      <p className="team-description">{member.description}</p>
+                      <div className="team-details">
+                        <div className="detail-item">
+                          <span className="detail-label">Specialty:</span>
+                          <span className="detail-text">{member.specialty}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
             </section>
           </div>
         </motion.div>
@@ -405,6 +492,7 @@ const AboutPage = () => {
     </div>
   );
 };
+
 
 
 
