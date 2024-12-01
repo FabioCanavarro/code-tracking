@@ -286,20 +286,28 @@
 }
 
 .team-grid {
+  border-radius: 1rem;
+  background-color: #10b981;
+  padding: 2rem;
+  padding-top: 4rem;
+  padding-bottom: 3rem;
   display: flex;
   flex-direction: column;
   gap: 2.5rem;
+  box-shadow: -1px 1px 73px 2px #bcd7ac, -1px 0px 3px 1px rgba(0, 0, 0, 0.54);
   width: 100%;
 }
 
 /* Team card styling */
 .team-card {
+  box-shadow: -1px 1px 14px 0.6px #bcd7ac;
   display: flex;
   border-radius: 1rem;
   overflow: hidden;
   background: white;
   transition: all 0.3s ease;
   position: relative;
+
 }
 
 /* Dynamic card background gradients */
@@ -312,7 +320,7 @@
 .team-card:nth-child(7) { background: linear-gradient(135deg, #a6c0fe, #f68084); }
 
 .team-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-20px);
   box-shadow: 
     0 20px 25px -5px rgba(0, 0, 0, 0.1),
     0 10px 10px -5px rgba(0, 0, 0, 0.04);
@@ -336,6 +344,7 @@
 }
 
 .team-content {
+  box-shadow: -1px 0px 3px 1px rgba(0, 0, 0, 0.54);
   flex: 1;
   padding: 2rem;
   background: rgba(255, 255, 255, 0.95);
@@ -367,7 +376,7 @@
 }
 
 .team-details {
-  background: rgba(247, 250, 252, 0.8);
+  background: rgba(240, 242, 244, 0.8);
   padding: 1rem;
   border-radius: 0.5rem;
   border: 1px solid rgba(203, 213, 224, 0.3);
