@@ -377,49 +377,49 @@ const teamMembers = [
     position: "Team Leader & Lead Developer",
     description: "Lead developer and project lead with expertise in IOT technology. Leading research in sustainable farming practices and overseeing the development of AgroBioSync's core technologies.",
     specialty: "Project Management & Software Development",
-    imageUrl: "/api/placeholder/300/300"
+    imageUrl: "src/assets/MembersPicture/fabio.jpg"
   },
   {
     name: "Melville",
     position: "Vice Team Leader & Lead Designer",
     description: "Vice Project lead with expertise in designing and testing.",
     specialty: "3D Modeling & Prototyping",
-    imageUrl: "/api/placeholder/300/300"
+    imageUrl: "src/assets/MembersPicture/melville.jpg"
   },
   {
     name: "Sheikha",
     position: "Lead Media Marketer",
     description: "Media Marketer with expertise in marketing and communication. Developing and implementing marketing strategies to promote AgroBioSync's products and services.",
     specialty: "Digital Marketing & Brand Management",
-    imageUrl: "/api/placeholder/300/300"
+    imageUrl: "src/assets/MembersPicture/sheikha.jpg"
   },
   {
     name: "Samuel",
     position: "Agricultural Data Scientist",
     description: "Full-stack developer specializing in agricultural monitoring systems.",
     specialty: "Data Analytics & Visualization",
-    imageUrl: "/api/placeholder/300/300"
+    imageUrl: "src/assets/MembersPicture/samuel.jpg"
   },
   {
     name: "Daniel",
     position: "Senior Engineer",
     description: "Engineer with expertise in building and implementing the hardware infrastructure for smart farming solutions.",
     specialty: "Sensor Networks & Hardware Integration",
-    imageUrl: "/api/placeholder/300/300"
+    imageUrl: "src/assets/MembersPicture/daniel.jpg"
   },
   {
     name: "Nara",
     position: "Senior Designer",
     description: "Designer with expertise in creating visually appealing advertising materials and visual design.",
     specialty: "Interface Design & User Research",
-    imageUrl: "/api/placeholder/300/300"
+    imageUrl: "src/assets/MembersPicture/nara.jpg"
   },
   {
     name: "Hewitt",
     position: "Engineer",
     description: "Engineer with expertise in developing and implementing hardware solutions.",
     specialty: "Implementation Of Hardware",
-    imageUrl: "/api/placeholder/300/300"
+    imageUrl: "src/assets/MembersPicture/hewitt.jpg"
   }
 ];
 
@@ -518,10 +518,9 @@ const ContactPage = () => {
             <div className="card-icon phone-icon">
               <Phone size={24} />
             </div>
-            <h2 className="contact-type">Phone</h2>
-            <p className="contact-info">Main: +62 (555) 123-4567</p>
-            <p className="contact-info">Support: +62 (555) 987-6543</p>
-            <a href="tel:+15551234567" className="contact-link">
+            <h2 className="contact-type">Phone Number</h2>
+            <p className="contact-info">main: +62 821-6068-0000</p>
+            <a href="tel:+62-821-6068-0000" className="contact-link">
               Call us now <ExternalLink size={16} />
             </a>
           </motion.div>
@@ -537,7 +536,7 @@ const ContactPage = () => {
             </div>
             <h2 className="contact-type">WhatsApp</h2>
             <p className="contact-info">Available Mon-Fri</p>
-            <a href="https://wa.me/" target="_blank" rel="noopener noreferrer" className="contact-link">
+            <a href="https://wa.me/6282160680000?text=I'm%20interested%20in%20AgrobioSync" target="_blank" rel="noopener noreferrer" className="contact-link">
               Chat on WhatsApp <ExternalLink size={16} />
             </a>
           </motion.div>
