@@ -23,8 +23,11 @@ The product consist of 2 main subproduct:
 - Home Page ✔️
 - Contact Us Page ✔️
 - About Us Page ✔️
-- Profile for each of the member in the About Us Page
-- Ai Insight
+- Profile for each of the member in the About Us Page ✔️
+- Whats App Phone number redirect ✔️
+- Video ✔️
+- Faq ✔️
+- Ai Insight based on data analytics
 
 ## Website
 Link: **https://agrobiosync.netlify.app/**
@@ -35,7 +38,7 @@ Link: **https://agrobiosync.netlify.app/**
 
 
 ### Contact Us
-![image](https://github.com/user-attachments/assets/4f63b2a8-612a-4482-b630-713fad739915)
+![image](https://github.com/user-attachments/assets/f9eb7d7a-0d6a-4c9f-a302-b030ddb7e639)
 ### About Us
 ![image](https://github.com/user-attachments/assets/b499d2b1-f19b-49c3-aafa-26290bee3c6c)
 ### DashBoard
