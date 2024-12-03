@@ -1,4 +1,11 @@
 // Navbar.jsx
+import fabioImg from '../assets/MembersPicture/fabio.jpg';
+import melvilleImg from '../assets/MembersPicture/melville.jpg';
+import sheikhaImg from '../assets/MembersPicture/sheikha.jpg';
+import samuelImg from '../assets/MembersPicture/samuel.jpg';
+import danielImg from '../assets/MembersPicture/daniel.jpg';
+import naraImg from '../assets/MembersPicture/nara.jpg';
+import hewittImg from '../assets/MembersPicture/hewitt.jpg';
 import React, { useState , useEffect , useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -377,49 +384,49 @@ const teamMembers = [
     position: "Team Leader & Lead Developer",
     description: "Lead developer and project lead with expertise in IOT technology. Leading research in sustainable farming practices and overseeing the development of AgroBioSync's core technologies.",
     specialty: "Project Management & Software Development",
-    imageUrl: "src/assets/MembersPicture/fabio.jpg"
+    imageUrl: fabioImg
   },
   {
     name: "Melville",
     position: "Vice Team Leader & Lead Designer",
     description: "Vice Project lead with expertise in designing and testing.",
     specialty: "3D Modeling & Prototyping",
-    imageUrl: "src/assets/MembersPicture/melville.jpg"
+    imageUrl: melvilleImg
   },
   {
     name: "Sheikha",
     position: "Lead Media Marketer",
     description: "Media Marketer with expertise in marketing and communication. Developing and implementing marketing strategies to promote AgroBioSync's products and services.",
     specialty: "Digital Marketing & Brand Management",
-    imageUrl: "src/assets/MembersPicture/sheikha.jpg"
+    imageUrl: sheikhaImg
   },
   {
     name: "Samuel",
     position: "Agricultural Data Scientist",
     description: "Full-stack developer specializing in agricultural monitoring systems.",
     specialty: "Data Analytics & Visualization",
-    imageUrl: "src/assets/MembersPicture/samuel.jpg"
+    imageUrl: samuelImg
   },
   {
     name: "Daniel",
     position: "Senior Engineer",
     description: "Engineer with expertise in building and implementing the hardware infrastructure for smart farming solutions.",
     specialty: "Sensor Networks & Hardware Integration",
-    imageUrl: "src/assets/MembersPicture/daniel.jpg"
+    imageUrl: danielImg
   },
   {
     name: "Nara",
     position: "Senior Designer",
     description: "Designer with expertise in creating visually appealing advertising materials and visual design.",
     specialty: "Interface Design & User Research",
-    imageUrl: "src/assets/MembersPicture/nara.jpg"
+    imageUrl: naraImg
   },
   {
     name: "Hewitt",
     position: "Engineer",
     description: "Engineer with expertise in developing and implementing hardware solutions.",
     specialty: "Implementation Of Hardware",
-    imageUrl: "src/assets/MembersPicture/hewitt.jpg"
+    imageUrl: hewittImg
   }
 ];
 
