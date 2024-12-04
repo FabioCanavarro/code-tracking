@@ -390,7 +390,7 @@ const teamMembers = [
     name: "Melville",
     position: "Vice Team Leader & Lead Designer",
     description: "Vice Project lead with expertise in designing and testing.",
-    specialty: "3D Modeling & Prototyping",
+    specialty: "3D Modeling & Building",
     imageUrl: melvilleImg
   },
   {
@@ -411,7 +411,7 @@ const teamMembers = [
     name: "Daniel",
     position: "Senior Engineer",
     description: "Engineer with expertise in building and implementing the hardware infrastructure for smart farming solutions.",
-    specialty: "Sensor Networks & Hardware Integration",
+    specialty: "Sensor Networks & Hardware",
     imageUrl: danielImg
   },
   {
