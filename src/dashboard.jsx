@@ -37,10 +37,10 @@ const Dashboard = ({ baseUrl = 'http://localhost:3001/api/sensor-data' }) => {
     for (let i = 9; i >= 0; i--) {
       const time = now - (i * 60000); // Every minute
       const baseValues = {
-        SoilTemp: 25 + Math.random() * 2 - 1,
-        AirTemp: 22 + Math.random() * 2 - 1,
-        Humidity: 60 + Math.random() * 4 - 2,
-        SoilMoisture: 40 + Math.random() * 4 - 2
+        SoilTemp: 0,
+        AirTemp: 0,
+        Humidity: 0,
+        SoilMoisture:0
       };
 
       Object.keys(initialData).forEach(key => {
