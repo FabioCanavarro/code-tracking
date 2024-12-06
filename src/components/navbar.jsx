@@ -231,7 +231,7 @@ const EmbersCanvas = ({
     },
     {
       title: "Desktop And Mobile Compatible",
-      description: "The Sleek Website is fully responsive and compatible with desktop and mobile devices.",
+      description: "The sleek website is fully responsive and compatible with desktop and mobile devices.",
       icon: "💻📱",
       color: "#26A69A"
     },
@@ -252,7 +252,26 @@ const EmbersCanvas = ({
       description: "Sustainable farming practices optimized for minimal environmental impact and maximum yield.",
       icon: "🌱",
       color: "#4DB6AC"
-    }
+    },
+    {
+      title: "Microbe-Rich Blend",
+      description: "Packed with beneficial microorganisms that immediately boost soil fertility and plant health.",
+      icon: "🦠",
+      color: "#33691E"
+    },
+    {
+      title: "Ready-To-Use",
+      description: "Pre-fermented and perfectly balanced formula that can be applied directly to soil without additional processing.",
+      icon: "✅",
+      color: "#689F38"
+    },
+    {
+    title: "Harvest Quality Enhancer",
+    description: "Improves crop flavor, nutrient content, and storage life through balanced nutrition.",
+    icon: "🏆",
+    color: "#43A047"
+  }
+
   ];
   const faqs = [
     {
@@ -277,6 +296,14 @@ const EmbersCanvas = ({
     {
       question: "What kind of product does our package provide?",
       answer: "We provide a complete package of the organic fertilizer, along with a machine that can be used for agricultural technology solutions, including real-time monitoring, smart irrigation, and eco-friendly solutions."
+    },
+    {
+      question: "What makes Bokashi fertilizer different from regular compost?",
+      answer: "Bokashi uses an anaerobic fermentation process that preserves more nutrients, produces no harmful gases, and works faster than traditional composting methods. It also creates beneficial microorganisms that enhance soil health."
+    },
+    {
+      question: "How does Bokashi fertilizer improve crop yield?",
+      answer: "Bokashi fertilizer provides a complete nutrient profile and beneficial microorganisms that improve soil structure, enhance nutrient absorption, and strengthen plant immune systems, leading to increased yields."
     }
   ];
   return (
@@ -380,53 +407,53 @@ const EmbersCanvas = ({
 // AboutPage
 const teamMembers = [
   {
-    name: "Fabio",
+    name: "Fabio Canavarro",
     position: "Team Leader & Lead Developer",
     description: "Lead developer and project lead with expertise in IOT technology. Leading research in sustainable farming practices and overseeing the development of AgroBioSync's core technologies.",
     specialty: "Project Management & Software Development",
     imageUrl: fabioImg
   },
   {
-    name: "Melville",
+    name: "Melville Maeda",
     position: "Vice Team Leader & Lead Designer",
     description: "Vice Project lead with expertise in designing and Building.",
     specialty: "3D Modeling & Building",
     imageUrl: melvilleImg
   },
   {
-    name: "Sheikha",
+    name: "Sheikha Moza Hudaya",
     position: "Lead Media Marketer",
     description: "Media Marketer with expertise in marketing and communication. Developing and implementing marketing strategies to promote AgroBioSync's products and services.",
     specialty: "Digital Marketing & Brand Management",
     imageUrl: sheikhaImg
   },
   {
-    name: "Samuel",
-    position: "Agricultural Data Scientist",
-    description: "Full-stack developer specializing in agricultural monitoring systems.",
-    specialty: "Data Analytics & Visualization",
+    name: "Samuel Resky Sinambela",
+    position: "Lead Agricultural Scientist",
+    description: "Agricultural Scientist specializing in agricultural systems, farming practices, and crop management.",
+    specialty: "Fertilizer & Plant Regulating Machine",
     imageUrl: samuelImg
   },
   {
-    name: "Daniel",
+    name: "Hewitt Hartanoto",
+    position: "Lead Engineer",
+    description: "Engineer with expertise in developing and implementing hardware solutions.",
+    specialty: "Implementation Of Hardware",
+    imageUrl: hewittImg
+  },
+  {
+    name: "Daniel Lim",
     position: "Senior Engineer",
     description: "Engineer with expertise in building and implementing the hardware infrastructure for smart farming solutions.",
     specialty: "Sensor Networks & Hardware intergration",
     imageUrl: danielImg
   },
   {
-    name: "Nara",
+    name: "Nara Mikaily Edelweis",
     position: "Senior Designer",
     description: "Designer with expertise in creating visually appealing advertising materials and visual design.",
     specialty: "Interface Design & User Research",
     imageUrl: naraImg
-  },
-  {
-    name: "Hewitt",
-    position: "Engineer",
-    description: "Engineer with expertise in developing and implementing hardware solutions.",
-    specialty: "Implementation Of Hardware",
-    imageUrl: hewittImg
   }
 ];
 
@@ -579,7 +606,7 @@ const ContactPage = () => {
             </div>
             <h2 className="contact-type">Email</h2>
             <p className="contact-info">General: fakekelios071@gmail.com</p>
-            <a href="mailto:info@company.com" className="contact-link">
+            <a href="mailto:fakekelios071@gmail.com" className="contact-link">
               Send email <ExternalLink size={16} />
             </a>
           </motion.div>
