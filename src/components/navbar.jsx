@@ -444,7 +444,7 @@ const teamMembers = [
   {
     name: "Daniel Lim",
     position: "Senior Engineer",
-    description: "Engineer with expertise in building and implementing the hardware infrastructure for smart farming solutions.",
+    description: "Engineer specializing in both building and implementing the hardware infrastructure for smart farming solutions.",
     specialty: "Sensor Networks & Hardware intergration",
     imageUrl: danielImg
   },
