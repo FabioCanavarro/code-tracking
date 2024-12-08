@@ -66,7 +66,7 @@ const Navbar = () => {
       <div className="nav-content">
         <div className="nav-wrapper">
           <Link to="/" className="logo">
-            <span className="logo-text">GreenSync</span>
+            <span className="logo-text">TerraBloom</span>
           </Link>
           
           <button className="mobile-menu-btn" onClick={toggleMenu}>
