@@ -286,8 +286,9 @@ void loop() {
 
 
 
+
   /*
-      soil temp rebound *TODO: havent been make
+      soil temp rebound *TODO: haven't been make
   */
   if (soiltempc < needed_soil_temp){
 
