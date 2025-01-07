@@ -22,17 +22,17 @@ Combined command:
 
 
 //*Pins and Setup
-// initiating the Pins
-// receiving Pins
-const int DHTPIN = D3;     //completed
-const int HYGROGENATOR_PIN = D6; //completed
-const int DB18S20 = D4; //completed
+// Initiating the Pins
+// Receiving Pins
+const int DHTPIN = D3;
+const int HYGROGENATOR_PIN = D6; 
+const int DB18S20 = D4; 
 
-// output Pins
-const int UAH = D5; //completed
-const int water_pump = D8;//completed
-const int fertilizer_pump = D7;//completed 
-const int growlight = D0; //completed
+// Output Pins
+const int UAH = D5; 
+const int water_pump = D8;
+const int fertilizer_pump = D7;
+const int growlight = D0; 
 
 // DHT22 setup
 DHT dht(DHTPIN, DHT22);
@@ -42,7 +42,7 @@ OneWire oneWire(DB18S20);
 DallasTemperature sensors(&oneWire);
 
 //*Variable
-// needed config for HYGROGENATOR
+// Needed config for HYGROGENATOR
 const int needed_air_temp= 26; //adjustable
 const int needed_soil_temp = 29; //adjustable
 const int needed_humidity_percentage = 60; //adjustable
@@ -55,7 +55,7 @@ const int duration_before_fertlizer_in_hours=72 ;
 
 // Misc
 int soilMoistureValue = 0;
-int soilmoisturepercent=0;
+int soilmoisturepercent= 0;
 int currentsecond;
 int tempsecond = 1800;//some delay before spraying
 
@@ -163,7 +163,6 @@ void loop() {
   
 
     // Check if readings have failed
-    
   float hum = dht.readHumidity();
   float tempC = dht.readTemperature();
   int moisturelevel = read_hygrometer();
