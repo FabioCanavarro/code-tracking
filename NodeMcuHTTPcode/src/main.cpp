@@ -41,8 +41,6 @@ DHT dht(DHTPIN, DHT22);
 OneWire oneWire(DB18S20);
 DallasTemperature sensors(&oneWire);
 
-
-
 //*Variable
 // needed config for HYGROGENATOR
 const int needed_air_temp= 26; //adjustable
@@ -265,7 +263,7 @@ void loop() {
 
   if (tempC < needed_air_temp){
     /*
-      Growlight
+      Grow light
     */
 
     delay(200);
@@ -275,7 +273,7 @@ void loop() {
   }
   else if (tempC > needed_air_temp){
     /*
-      turn off growlight
+      turn off Grow Light
       turn on ultrasonic atomizer humidifier for 3 sec
     */
     delay(200);
