@@ -95,30 +95,28 @@ int readDS18B20(){
 }
 
 int read_hygrometer(){
-  soilMoistureValue = analogRead(HYGROGENATOR_PIN);  // put Sensor insert into soil
+  soilMoistureValue = analogRead(HYGROGENATOR_PIN);
   Serial.println(soilMoistureValue);
   soilmoisturepercent = map(soilMoistureValue, AirValue, WaterValue, 0, 100);
   if(soilmoisturepercent >= 100)
   {
     return 100;
   }
-  else if(soilmoisturepercent <=0)
+  else if(soilmoisturepercent <= 0)
   {
     return 0;
   }
-
-  else if(soilmoisturepercent >0 && soilmoisturepercent < 100)
+  else
   {
     return soilmoisturepercent;
   }
-  return soilmoisturepercent;
 }
 
 
 void setup() {
 digitalWrite(fertilizer_pump,HIGH);
 digitalWrite(water_pump,HIGH);
-  // wifi
+  // Wifi Setup
   Serial.begin(115200);
     Serial.println("Ready");
 
@@ -138,6 +136,7 @@ digitalWrite(water_pump,HIGH);
         Serial.println(WiFi.localIP());
         server.begin();
     }
+
   pinMode(growlight,OUTPUT);
   pinMode(water_pump,OUTPUT);
   pinMode(fertilizer_pump,OUTPUT);
@@ -162,7 +161,7 @@ void loop() {
   // Wait a few seconds between measurements.
   
 
-    // Check if readings have failed
+  // Check if readings have failed
   float hum = dht.readHumidity();
   float tempC = dht.readTemperature();
   int moisturelevel = read_hygrometer();
@@ -170,7 +169,7 @@ void loop() {
   
 
 
-    //change it to fit into network code
+    // Change it to fit into the correct json
     float soilTemp = soiltempc;
     float airTemp = tempC;
     float humidity = hum;
@@ -272,8 +271,8 @@ void loop() {
   }
   else if (tempC > needed_air_temp){
     /*
-      turn off Grow Light
-      turn on ultrasonic atomizer humidifier for 3 sec
+      Turn off Grow Light
+      Turn on ultrasonic atomizer humidifier for 3 sec
     */
     delay(200);
     digitalWrite(growlight,LOW);
@@ -283,10 +282,10 @@ void loop() {
 
 
   if (soiltempc > needed_soil_temp){
-
+    // Check if soil temp is too high
+    // Turn on water pump
     delay(200);
     digitalWrite(water_pump,HIGH);
-    
     
     delay(400);
     digitalWrite(water_pump,LOW);
@@ -299,7 +298,7 @@ void loop() {
 
   if (hum < needed_humidity_percentage){
     /*
-    turn on ultrasonic atomizer humidifier
+      Turn on ultrasonic atomizer humidifier
     */
     delay(200);
     digitalWrite(UAH,HIGH);
@@ -309,16 +308,13 @@ void loop() {
   }
   else if (hum > needed_humidity_percentage){
     /*
-    turn off ultrasonic atomizer humidifier
-    turn on grow light
+      Turn off ultrasonic atomizer humidifier
+      Turn on grow light
     */
     delay(200);
     digitalWrite(UAH,LOW);
     float hum = dht.readHumidity();
   }
-
-
-
 
 
 
@@ -358,9 +354,4 @@ void loop() {
   } else {
     Serial.println("WiFi Disconnected");
   }
-
-  
-
-  
-
 }
