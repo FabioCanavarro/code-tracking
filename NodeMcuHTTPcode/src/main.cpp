@@ -283,17 +283,7 @@ void loop() {
   }
 
 
-
-
-  /*
-      soil temp rebound *TODO: haven't been make
-  */
-  if (soiltempc < needed_soil_temp){
-
-    float soiltempc = readDS18B20();
-
-  }
-  else if (soiltempc > needed_soil_temp){
+  if (soiltempc > needed_soil_temp){
 
     delay(200);
     digitalWrite(water_pump,HIGH);
@@ -324,7 +314,7 @@ void loop() {
     turn on grow light
     */
     delay(200);
-    digitalWrite(UAH,HIGH);
+    digitalWrite(UAH,LOW);
     float hum = dht.readHumidity();
   }
 
@@ -333,7 +323,6 @@ void loop() {
 
 
 
-  // Create JSON object
   // Create JSON object
   DynamicJsonDocument doc(200);
   doc["SoilTemp"] = soilTemp;
