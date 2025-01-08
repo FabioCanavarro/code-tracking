@@ -1,3 +1,11 @@
+/*
+Todo:
+- Add Multiprocessing to proccess the if conditions parallelly
+- Add error handling for when the sensor fails to read
+- Show error message on the website
+- fix the circuit not responding after restarting microcontroller
+*/
+
 #include <Arduino.h> //done
 #include <ESP8266WiFi.h> //done
 #include <ESP8266HTTPClient.h> //done
